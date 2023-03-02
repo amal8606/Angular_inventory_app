@@ -1,0 +1,35 @@
+<div class="flex flex-col bg-blue-100">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead  class="bg-white border-b">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase">product Name</th>
+                <th scope="col" class=" px-6 py-3 text-left text-xs font-medium text-red-500 uppercase ">Price</th>
+         
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase">stock</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase"></th>
+
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-red-500 uppercase">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700" *ngFor="let user of userData">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-800 ">{{user.product_name}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-800 ">{{user.price | currency:'USD'}}</td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-800 dark:text-gray-200">{{user.stock}}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <a class="text-blue-500 hover:text-blue-700" routerLink='/products/{{user.id}}'>view Details</a></td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <a class="text-blue-500 hover:text-blue-700" routerLink="/dashboard" (click)="deleteRow(user.id)">Delete</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
