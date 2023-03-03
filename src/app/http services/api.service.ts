@@ -21,4 +21,8 @@ getSingleProduct(productId:any):any{
     return this.http.get(`${this.url}/products/${productId}`)
 
 }
+updateSingleProduct(product:any){
+    return this.http.put(`${this.url}/products/${product.id}`,product)
+}
+
 }
