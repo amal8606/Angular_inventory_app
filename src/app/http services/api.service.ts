@@ -12,7 +12,7 @@ export class apiService{
     constructor(private readonly http:HttpClient){
 
     }
-    public url='https://63be61a4585bedcb36ac081a.mockapi.io'
+    public url='https://api-sales-app.josetovar.dev'
 getApi(endpoint:any){
    return this.http.get(`${this.url}/${endpoint}`)
 }
@@ -22,7 +22,10 @@ getSingleProduct(productId:any):any{
 
 }
 updateSingleProduct(product:any){
-    return this.http.put(`${this.url}/products/${product.id}`,product)
+    return this.http.put(`${this.url}/products`,product)
+}
+addProduct(product:any){
+    return this.http.post(`${this.url}/products`,product)
 }
 
 }

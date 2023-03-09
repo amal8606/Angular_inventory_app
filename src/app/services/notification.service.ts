@@ -16,5 +16,8 @@ this.toast.success(message)
 showWarining(message:any){
 this.toast.warning(message)
 }
+showError(message:any){
+    this.toast.error(message)
+}
 
 }

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import{LoginGuard} from './authentication/login,guard';
 import { ShowPasComponent } from './show-pas/show-pas.component';
@@ -15,14 +13,13 @@ import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { notificationService } from './services/notification.service';
+import { TokenInterceptor } from './authentication/token.interceptor';
 // import { tokenInterceptor } from './authentication/token.intercept';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent,
     ShowPasComponent,
     SimpleProductComponent,
     HomeComponent,
@@ -46,7 +43,8 @@ ToastrModule.forRoot({
 
 )
   ],
-  providers: [LoginGuard,apiService,notificationService
+  providers: [LoginGuard,apiService,notificationService,
+    {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}
  ],
   bootstrap: [AppComponent]
 })

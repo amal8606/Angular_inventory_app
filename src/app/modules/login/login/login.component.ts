@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { notificationService } from '../services/notification.service';
+import { notificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -26,22 +26,24 @@ export class LoginComponent {
     ),
   });
   toShow: boolean = false;
-  public url = 'https://63be61a4585bedcb36ac081a.mockapi.io/users';
+  public url = 'https://api-sales-app.josetovar.dev/login';
   public login() {
     const { email, password } = this.loginForm.value;
-    this.Httpservice.get(this.url).subscribe((response: any) => {
+    console.log(this.loginForm.value)
+    this.Httpservice.post(this.url,this.loginForm.value).subscribe((response: any) => {
       if (response) {
-        response.map((users: any) => {
-          if (users.email == email && users.password == password) {
-            localStorage.setItem('loggedIn', 'true');
+        console.log(response)
+        // response.map((users: any) => {
+        //   // if (users.email == email && users.password == password) {
+            localStorage.setItem('access_token',
+             JSON.stringify(response.access_token));
             this.notification.showSuccess('login success..!')
             this.routeVal.navigate(['dashboard']);
-            console.log('this.routeVal.url');
           
-          } else {
-           this.toShow=true;
-          }
-        });
+          // } else {
+          //  this.toShow=true;
+          // }
+        // });
       }
     });
     // const { email, password } = this.loginForm.value;

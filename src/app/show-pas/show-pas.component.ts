@@ -23,7 +23,7 @@ export class ShowPasComponent {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
-  public url = 'https://63be61a4585bedcb36ac081a.mockapi.io/users';
+  public url = 'https://api-sales-app.josetovar.dev/users';
   getPassword() {
     const body = this.registerForm.value;
     console.log(body);
