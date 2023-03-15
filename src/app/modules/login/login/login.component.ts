@@ -37,6 +37,7 @@ export class LoginComponent {
         //   // if (users.email == email && users.password == password) {
             localStorage.setItem('access_token',
              JSON.stringify(response.access_token));
+             localStorage.setItem('login','true')
             this.notification.showSuccess('login success..!')
             this.routeVal.navigate(['dashboard']);
           

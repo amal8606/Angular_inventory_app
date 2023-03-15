@@ -6,7 +6,7 @@ import { ActivatedRoute, CanActivate } from '@angular/router';
 export class dashBoardGuard implements CanActivate{
 constructor(){}
 canActivate():boolean{
-   const loggedIn=localStorage.getItem('loggedIn');
+   const loggedIn=localStorage.getItem('login');
    if(loggedIn){
       return true;
    }

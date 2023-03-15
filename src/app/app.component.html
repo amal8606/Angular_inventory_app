@@ -32,9 +32,9 @@
     <div id="navbar-dark" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
       <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
         <a class="hover:-translate-y-1 hover:scale-110 duration-300 font-medium text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-gray-400 hover:text-[20px]" routerLink="home">Home</a>
-        <a class="login" routerLink="login">Login</a>
-        <a class="login" routerLink="dashboard">dashboard</a>
-        <a class="login" routerLink="login" (click)="changeStatus()">Log Out</a>
+        <a class="login" routerLink="login" [routerLinkActive]="'active'">Login</a>
+        <a class="login" routerLink="dashboard" [routerLinkActive]="'active'">dashboard</a>
+        <a class="login" routerLink="login" (click)="changeStatus()" [routerLinkActive]="'active'">Log Out</a>
       </div>
     </div>
   </nav>

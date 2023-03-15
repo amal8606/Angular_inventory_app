@@ -3,7 +3,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { LoginGuard } from 'src/app/authentication/login,guard';
 import { LoginComponent } from '../login/login.component';
 
-const routes: Routes = [{ path: '', component: LoginComponent }];
+const routes: Routes = [{ path: '', component: LoginComponent,canActivate:[LoginGuard] }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
