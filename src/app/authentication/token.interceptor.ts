@@ -14,7 +14,6 @@ import {catchError, Observable, throwError} from 'rxjs'
 
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {
-    console.log('hi')
   }
   intercept(
     req: HttpRequest<any>,

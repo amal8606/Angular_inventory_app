@@ -16,7 +16,7 @@
 <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-red-800 text-sm py-4 dark:bg-white fixed top-0 ">
   <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
     <div class="flex items-center justify-between">
-      <img class="max-w-[50px] hover:max-w-[60px] rounded-full border border-transparent mr-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh9y-SpSQPWVMKemxhlCvmVbPFnxiKdLsG1g&usqp=CAU" alt="">
+      <img class="hover:-translate-y-1 hover:scale-110 duration-300 max-w-[50px] hover:max-w-[60px] rounded-full border border-transparent mr-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh9y-SpSQPWVMKemxhlCvmVbPFnxiKdLsG1g&usqp=CAU" alt="">
       <h1 class="flex-none text-xxl ms-0 font-semibold text-white dark:text-gray-800">Inventory</h1>
       <div class="sm:hidden">
         <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700/[.25] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-collapse="#navbar-dark" aria-controls="navbar-dark" aria-label="Toggle navigation">
@@ -31,10 +31,10 @@
     </div>
     <div id="navbar-dark" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
       <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
-        <a class="font-medium text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-gray-400 hover:text-[20px]" routerLink="home">Home</a>
-        <a class="font-medium text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-gray-400  hover:text-[20px]" routerLink="login">Login</a>
-        <a class="font-medium text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-gray-400  hover:text-[20px]" routerLink="dashboard">dashboard</a>
-        <a class="font-medium text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-gray-400  hover:text-[20px]" routerLink="login" (click)="changeStatus()">Log Out</a>
+        <a class="hover:-translate-y-1 hover:scale-110 duration-300 font-medium text-gray-400 hover:text-blue-500 dark:text-gray-500 dark:hover:text-gray-400 hover:text-[20px]" routerLink="home">Home</a>
+        <a class="login" routerLink="login">Login</a>
+        <a class="login" routerLink="dashboard">dashboard</a>
+        <a class="login" routerLink="login" (click)="changeStatus()">Log Out</a>
       </div>
     </div>
   </nav>

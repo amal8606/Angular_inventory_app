@@ -17,15 +17,20 @@ export class DashboardComponent implements OnInit {
     private http: HttpClient,
     private toastr: notificationService
   ) {}
-  
-public activeEvent:any;
-public stockEvent:any;
+  isloading: boolean = false;
+  public activeEvent: any;
+  public stockEvent: any;
   disable: boolean = false;
   buttonView: boolean = true;
   new_stock!: number;
   userData$!: Observable<any>;
+  productCopy: any;
   onEdit = false;
+  searchValue!: string;
   endpoint = 'products';
+  currentPage = 1;
+  pageSize = 3;
+  totalData!: number;
   public updateForm: FormGroup = new FormGroup({});
   url = 'https://api-sales-app.josetovar.dev/products';
 
@@ -34,11 +39,10 @@ public stockEvent:any;
     price: new FormControl(''),
     sku: new FormControl(''),
     stock: new FormControl(''),
-    active:new  FormControl(false),
-
+    active: new FormControl(false),
   });
   ngOnInit(): void {
-  
+    this.isloading = true;
     this.userData$ = this.http.get<{
       id: number;
       name: string;
@@ -47,50 +51,89 @@ public stockEvent:any;
       stock: number;
     }>(this.url);
 
-    this.userData$.subscribe((products) => {
-      console.log(products);
-      products.map((product: any) => {
-        this.updateForm.addControl(
-          `${product.id}`,
-          new FormGroup({
-            price: new FormControl(formatCurrency(product.price, 'en-US', '$')),
-            stock: new FormControl(product.stock),
-            enableEdit: new FormControl(false),
-          })
-        );
-      });
+    this.userData$.subscribe({
+      next: (products) => {
+        this.totalData = products.length;
+        products.map((product: any) => {
+          this.updateForm.addControl(
+            `${product.id}`,
+            new FormGroup({
+              price: new FormControl(
+                formatCurrency(product.price, 'en-US', '$')
+              ),
+              stock: new FormControl(product.stock),
+              enableEdit: new FormControl(false),
+            })
+          );
+        });
+      },
+      error: () => {
+        this.toastr.showError('timeout, please login again...');
+      },
+      complete: () => {
+        this.isloading = false;
+      },
     });
-  
+  }
+  pageChange(pageNumber: number) {
+    this.currentPage = pageNumber;
   }
   /////Filter///////////////////////
   public setFilter(activeEvent: any): void {
+    this.currentPage=1
     this.userData$ = this.http.get(this.url).pipe(
       map((products: any) => {
         if (activeEvent.target.value) {
-          return products.filter(
-            (product: any) => product.active.toString() === activeEvent.target.value
+          const newProduct = products.filter(
+            (product: any) =>
+              product.active.toString() === activeEvent.target.value
           );
-        }
-        else{
-          return products
-        }
-      })
-    );
-  }
-  public stockFilter(event: any): void {
-    this.userData$ = this.http.get<any>(this.url).pipe(
-      map((products: any) => {
-        if (event.target.value == 0) {
-          return products.filter((product: any) => product.stock == 0);
-        } else if (event.target.value == 1) {
-          return products.filter((product: any) => product.stock != 0);
+          this.totalData = newProduct.length;
+
+          return newProduct;
         } else {
+          this.totalData = products.length;
+
           return products;
         }
       })
     );
   }
+  public stockFilter(event: any): void {
+    this.currentPage=1
+    this.userData$ = this.http.get<any>(this.url).pipe(
+      map((products: any) => {
+        if (event.target.value == 0) {
+          const newProduct = products.filter(
+            (product: any) => product.stock == 0
+          );
+          this.totalData = newProduct.length;
 
+          return newProduct;
+        } else if (event.target.value == 1) {
+          const newProduct = products.filter(
+            (product: any) => product.stock != 0
+          );
+          this.totalData = newProduct.length;
+
+          return newProduct;
+        } else {
+          this.totalData = products.length;
+
+          return products;
+        }
+      })
+    );
+  }
+  searchProduct() {
+    this.userData$ = this.userData$.pipe(
+      map((products: any) => {
+        return products.filter((product: any) =>
+          product.name.toLowerCase().includes(this.searchValue.toLowerCase())
+        );
+      })
+    );
+  }
 
   ////////////////////////////////////////////////////////////
   UpdateStatus(product: any, event: any) {
@@ -103,13 +146,21 @@ public stockEvent:any;
       .subscribe({
         next: (response) => {
           if (response) {
-            this.toastr.showSuccess(
-              `Product with ID: ${product.id} has been activated successfully.`
-            );
+            if (status) {
+              this.toastr.showSuccess(
+                `Product with ID: ${product.id} has been activated successfully.`
+              );
+            } else {
+              this.toastr.showWarining(
+                `Product with ID: ${product.id} has been deactivated..`
+              );
+            }
           }
         },
         error: (error) => {
-          this.toastr.showError(`Product with ID: ${product.id} does not exist.`);
+          this.toastr.showError(
+            `Product with ID: ${product.id} does not exist.`
+          );
         },
         complete: () => {
           console.log('complete');
@@ -135,38 +186,45 @@ public stockEvent:any;
   }
   updateValue(product: any) {
     const { price } = this.updateForm.controls[product.id].value;
-    console.log(product);
     let newValues = {
       ...product,
       ...this.updateForm.controls[product.id].value,
       price: +price.substring(1).replaceAll(',', ''),
     };
-    console.log(newValues);
+
     let { enableEdit } = this.updateForm.controls[product.id].value;
 
     this.api.updateSingleProduct(newValues).subscribe((response) => {
       if (response) {
         this.toastr.showSuccess('Updated successfully...');
         this.api.getApi(this.endpoint).subscribe((response: any) => {
-          console.log(response);
           this.userData$ = of(response);
         });
-        console.log(response);
+
         enableEdit = false;
       }
     });
   }
 
   deleteRow(id: number) {
-    this.http.delete(`${this.url}/${id}`).subscribe((response: any) => {
-      if (response) {
-        this.toastr.showSuccess('deleted successfully...');
-        this.api.getApi(this.endpoint).subscribe((response: any) => {
-          console.log(response);
-          this.userData$ = of(response);
-        });
-      }
-    });
+    if (confirm('Are you sure, want to delete the field ?..')) {
+      this.http.delete(`${this.url}/${id}`).subscribe((response: any) => {
+        if (response) {
+          this.isloading = true;
+
+          this.toastr.showSuccess('deleted successfully...');
+          this.api.getApi(this.endpoint).subscribe({
+            next: (response: any) => {
+              console.log(response);
+              this.userData$ = of(response);
+            },
+            complete: () => {
+              this.isloading = false;
+            },
+          });
+        }
+      });
+    }
   }
   disableUpdateButton(product: any) {
     const { price, stock } = this.updateForm.controls[product.id].value;
@@ -177,36 +235,22 @@ public stockEvent:any;
   }
   disableEditing(product: any) {
     const { enableEdit } = this.updateForm.controls[product.id].value;
-    console.log(enableEdit)
     return enableEdit;
   }
-  createProduct(){
-    this.onEdit=true;
+  createProduct() {
+    this.onEdit = true;
   }
   addRow() {
     const { name, price, sku, stock } = this.addNewRow.value;
-   console.log(this.addNewRow.value)
-   this.http.post(this.url,this.addNewRow.value).subscribe(res=>{
-    if (res) {
-      this.toastr.showSuccess('new product added successfully...');
-      this.api.getApi(this.endpoint).subscribe((response: any) => {
-        console.log(response);
-       
-      });
-      
-    }
-    // this.userData$ = this.api.getApi(this.endpoint)
-         
-    // this.userData$.subscribe()
-
-   
-   })
-      
-   this.onEdit=false
-   
-
+    console.log(this.addNewRow.value);
+    this.http.post(this.url, this.addNewRow.value).subscribe((res) => {
+      if (res) {
+        this.toastr.showSuccess('New product added successfully!');
+    
+      }
+    });
   }
-  cancelChanges(){
-    this.onEdit=false;
+  cancelChanges() {
+    this.onEdit = false;
   }
 }

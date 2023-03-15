@@ -1,0 +1,23 @@
+<nav class="flex items-center space-x-2 m-3 text-xl text-gray-900 bg-yellow-400 max-w-[500px] p-3 rounded-full mx-auto">
+  <button
+  [hidden]="currentPage==1"
+  (click)="prevBtn()"
+   class="hover:text-blue-600 p-3 inline-flex items-center gap-2 rounded-md" >
+    Previous
+</button>
+  <ng-container *ngFor="let page of pages">
+    <button
+    class="m-2"
+    [ngClass]="{'pagination':page===currentPage}"
+    (click)="gotoPage(page)"
+     class="hover:text-blue-600 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
+  </ng-container>
+  
+  
+  <button
+  [hidden]="currentPage==total"
+  (click)="nxtBtn()"
+  class=" hover:text-blue-600 p-3 inline-flex items-center gap-2 rounded-md" >
+    Next
+</button>
+</nav>

@@ -13,8 +13,14 @@ export class AppComponent {
 
   }
   changeStatus(){
-    this.route.navigate(['login'])
-    localStorage.clear();
+    if(confirm('Do want to log out?')){
+      this.route.navigate(['login'])
+      localStorage.clear();
+    }else{
+      console.log("don't want to log out")
+      this.route.navigateByUrl(this.route.url)
+    }
+   
     
   }
 }
