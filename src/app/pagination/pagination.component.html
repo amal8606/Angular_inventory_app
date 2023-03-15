@@ -4,7 +4,8 @@
     [hidden]="currentPage==1"
     (click)="prevBtn()"
      class="hover:text-blue-600 p-3 inline-flex items-center gap-2 rounded-md" >
-      Previous
+     <span aria-hidden="true">«</span>
+    <span class="sr-only">Previous</span>
   </button>
     <ng-container *ngFor="let page of pages">
       <button
@@ -19,7 +20,8 @@
     [hidden]="currentPage==total"
     (click)="nxtBtn()"
     class=" hover:text-blue-600 p-3 inline-flex items-center gap-2 rounded-md" >
-      Next
+    <span class="sr-only">Next</span>
+    <span aria-hidden="true">»</span>
   </button>
   </nav>
 </div>
