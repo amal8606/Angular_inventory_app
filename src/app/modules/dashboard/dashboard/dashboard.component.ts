@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
                 formatCurrency(product.price, 'en-US', '$')
               ),
               stock: new FormControl(product.stock),
-              enableEdit: new FormControl(false),
+              enableEdit: new FormControl(product.active),
             })
           );
         });

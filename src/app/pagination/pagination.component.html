@@ -1,9 +1,9 @@
 <div class="flex justify-end">
-  <nav class="flex items-center space-x-2 m-3 text-md text-gray-900 bg-green-600/50 max-w-[500px] p-3 rounded-full font-bold" >
+  <nav class="flex items-center space-x-2 m-3 text-md text-white  max-w-[500px] p-3 rounded-full font-bold" >
     <button
     [hidden]="currentPage==1"
     (click)="prevBtn()"
-     class="hover:text-blue-600 p-3 inline-flex items-center gap-2 rounded-md" >
+     class="hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500" >
      <span aria-hidden="true">«</span>
     <span class="sr-only">Previous</span>
   </button>
@@ -12,14 +12,14 @@
       class="m-2"
       [ngClass]="{'pagination':page===currentPage}"
       (click)="gotoPage(page)"
-       class="hover:text-blue-600 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
+       class="hover:text-blue-300 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
     </ng-container>
     
     
     <button
     [hidden]="currentPage==total"
     (click)="nxtBtn()"
-    class=" hover:text-blue-600 p-3 inline-flex items-center gap-2 rounded-md" >
+    class=" hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500" >
     <span class="sr-only">Next</span>
     <span aria-hidden="true">»</span>
   </button>
