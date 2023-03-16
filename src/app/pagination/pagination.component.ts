@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnChanges{
   constructor() {}
   @Input()
   currentPage!: number;
@@ -40,5 +40,12 @@ export class PaginationComponent {
     if (this.currentPage <= this.total) {
       this.paginate.emit(this.currentPage + 1);
     }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+    console.log(this.totalData)
+    // console.log(changes)
+    // console.log(changes['currentPage'])
+//  console.log(changes['totalData'])
   }
 }
