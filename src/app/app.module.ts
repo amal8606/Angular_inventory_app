@@ -14,7 +14,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { notificationService } from './services/notification.service';
 import { TokenInterceptor } from './authentication/token.interceptor';
-import { paginationPipe } from './pipes/pagination.pipe';
+
+import { PaginationComponent } from './pagination/pagination.component';
 // import { tokenInterceptor } from './authentication/token.intercept';
 
 
@@ -23,9 +24,11 @@ import { paginationPipe } from './pipes/pagination.pipe';
     AppComponent,
     ShowPasComponent,
     SimpleProductComponent,
-    HomeComponent
+    HomeComponent,
+  
 
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,

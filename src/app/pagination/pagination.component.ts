@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-pagination',
@@ -12,7 +20,7 @@ export class PaginationComponent implements OnChanges{
   pageSize!: number;
   @Input()
   public products!: Observable<any>;
-  @Input()
+  // @Input()
   totalData!: number;
   get total(): number {
     return Math.ceil(this.totalData / this.pageSize);
@@ -41,11 +49,20 @@ export class PaginationComponent implements OnChanges{
       this.paginate.emit(this.currentPage + 1);
     }
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-    console.log(this.totalData)
-    // console.log(changes)
-    // console.log(changes['currentPage'])
-//  console.log(changes['totalData'])
+  ngOnChanges(changes: SimpleChanges) {
+    this.products.subscribe(product=>{
+      console.log(product.length)
+      this.totalData=product.length
+    })
+    if(changes['products']){
+      this.currentPage=1
+    }
+
   }
+
+ 
+
 }
+  
+
+

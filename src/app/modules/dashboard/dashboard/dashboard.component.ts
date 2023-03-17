@@ -100,25 +100,23 @@ export class DashboardComponent implements OnInit {
     );
   }
   public stockFilter(event: any): void {
-    this.currentPage=1
     this.userData$ = this.http.get<any>(this.url).pipe(
       map((products: any) => {
         if (event.target.value == 0) {
           const newProduct = products.filter(
             (product: any) => product.stock == 0
           );
-          this.totalData = newProduct.length;
+       
 
           return newProduct;
         } else if (event.target.value == 1) {
           const newProduct = products.filter(
             (product: any) => product.stock != 0
           );
-          this.totalData = newProduct.length;
+       
 
           return newProduct;
         } else {
-          this.totalData = products.length;
 
           return products;
         }

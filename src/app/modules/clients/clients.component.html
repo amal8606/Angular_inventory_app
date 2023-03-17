@@ -1,0 +1,200 @@
+<div class="bg-black/80">
+  <div class="flex justify-end">
+    <nav class="flex items-center space-x-2 m-3 text-md text-white  max-w-[500px] p-3 rounded-full font-bold" >
+      <button
+      (click)="prevBtn()"
+      [hidden]="currentPage==1"
+
+       class="hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500" >
+       <span aria-hidden="true">«</span>
+      <span class="sr-only">Previous</span>
+    </button>
+      <ng-container *ngFor="let page of pages">
+        <button
+       (click)="gotoPage(page)" 
+        class="m-2"
+         [ngClass]="{'pagination':page===currentPage}"
+         class="hover:text-blue-300 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
+      </ng-container>
+      
+      
+      <button
+     (click)="nxtBtn()"
+     [hidden]="currentPage==total"
+      class=" hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500" >
+      <span class="sr-only">Next</span>
+      <span aria-hidden="true">»</span>
+    </button>
+    </nav>
+  </div>
+  
+<div class="flex flex-col bg-black/80 max-h-[500rem]">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="overflow-hidden">
+          <hr class="text-white">
+          
+          <form >
+            <table
+              class="min-w-full divide-y divide-gray-200"
+            >
+              <thead class="bg-white">
+                <tr>
+                
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                  >
+                    First Name 
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                  >
+                    Last Name
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                  >
+                    Address
+                  </th>
+  
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                  >
+                    City
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                  >
+                    State
+                  </th>
+                  <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                >
+                  coutry
+                </th>
+                <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                phone
+              </th>
+              <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+            >
+              email
+            </th>
+            <th
+            scope="col"
+            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+          >
+            action
+          </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 ">
+                <tr
+                  *ngFor="let user of clients$ |pagination : currentPage : pageSize|async"
+                  class="hover:bg-gray-700"
+                >
+                 
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white hover:text-red-800  "
+                  >
+                    {{ user.first_name | uppercase}}
+                  </td>
+  
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-white "
+                  >
+                    
+                      {{ user.last_name}}
+                
+                    
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white"
+                  >
+                    {{ user.address }}
+                  </td>
+  
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-white"
+                  >
+                
+                      {{ user.city }}
+                
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-white"
+                  >
+                
+                      {{ user.state }}
+                
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-white"
+                  >
+                
+                      {{ user.country }}
+                
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-white"
+                  >
+                
+                      {{ user.phone }}
+                
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm text-white"
+                  >
+                
+                      {{ user.email }}
+                
+                  </td>
+                  
+
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  >
+                    <button
+        
+                      type="button"
+                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm "
+                    >
+                      Update
+                    </button>
+                    <button
+                   
+                      type="button"
+                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                    >
+                      view
+                    </button>
+                    <button
+                    (click)="deleteRow(user.id)"
+                      type="button"
+                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+  
+</div>
+

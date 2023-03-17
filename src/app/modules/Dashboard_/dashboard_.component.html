@@ -1,0 +1,33 @@
+<div style="margin-top: 150px; background-color: white;"> 
+  
+  <a
+  routerLink="products"
+  [routerLinkActive]="'bg-red-900'"
+ 
+
+    class="hover:-translate-y-1 hover:scale-110 duration-300 py-6 px-4 inline-flex justify-center items-center gap-2 rounded-md  border-gray-900 font-semibold bg-white text-black focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm dark:hover:bg-gray-900
+      "
+  >
+  <img
+  class="max-w-[50px]"
+   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDZHtHCVZd4Nml7kCBjmp34gKW52Vgf66PaFBpKLmzJZMiZJLtRpMJs12wCygO4fNkxqc&usqp=CAU" alt="">
+    Products
+</a>
+  <a
+  routerLink="clients"
+  [routerLinkActive]="'text-red-600'"
+ 
+
+    class="hover:-translate-y-1 hover:scale-110 duration-300 py-6 px-4 inline-flex justify-center
+     items-center gap-2 font-semibold bg-white text-black 
+     focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm
+      "
+  >
+  <img
+
+  class="max-w-[50px]"
+  src="https://www.shutterstock.com/image-vector/manager-group-vector-icon-style-260nw-685042366.jpg" alt="">
+    clients
+</a>
+  </div>
+  <router-outlet></router-outlet>

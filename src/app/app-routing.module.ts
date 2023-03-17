@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './authentication/login,guard';
-import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 
 import { ShowPasComponent } from './show-pas/show-pas.component';
@@ -14,8 +13,12 @@ const routes: Routes = [
   {path:'products/:productId',component:SimpleProductComponent},
   {path:'home',component:HomeComponent},
   {path:'',component:HomeComponent},
-  { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
+  
   { path: 'login', loadChildren: () => import('./modules/login/login/login.module').then(m => m.LoginModule),canActivate:[LoginGuard] },
+  { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard_.module').then(m => m.Dashboard_Module) },
+ 
+  { path: 'clients', loadChildren: () => import('./modules/clients/clients.module').then(m => m.ClientsModule) },
+
 ];
 
 @NgModule({

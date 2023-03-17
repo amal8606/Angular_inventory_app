@@ -5,7 +5,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from 'src/app/pagination/pagination.component';
-import { paginationPipe } from 'src/app/pipes/pagination.pipe';
+import { SharedModule } from '../../shareModule.module';
+
 
 
 
@@ -13,13 +14,14 @@ import { paginationPipe } from 'src/app/pipes/pagination.pipe';
   declarations: [
     DashboardComponent,
     PaginationComponent,
-    paginationPipe
+   
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+SharedModule
     
   ]
 })
