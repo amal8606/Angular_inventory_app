@@ -15,7 +15,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { notificationService } from './services/notification.service';
 import { TokenInterceptor } from './authentication/token.interceptor';
 
-import { PaginationComponent } from './pagination/pagination.component';
 // import { tokenInterceptor } from './authentication/token.intercept';
 
 
@@ -25,6 +24,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     ShowPasComponent,
     SimpleProductComponent,
     HomeComponent,
+   
+
   
 
   ],

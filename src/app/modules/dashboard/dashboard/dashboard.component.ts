@@ -244,7 +244,15 @@ export class DashboardComponent implements OnInit {
     this.http.post(this.url, this.addNewRow.value).subscribe((res) => {
       if (res) {
         this.toastr.showSuccess('New product added successfully!');
-    
+        this.http.get(`${this.url}`).subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.userData$ = of(response);
+          },
+          complete: () => {
+        
+          },
+        });
       }
     });
   }
