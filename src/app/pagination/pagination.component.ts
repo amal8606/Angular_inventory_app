@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
 })
-export class PaginationComponent implements OnChanges{
+export class PaginationComponent implements OnChanges {
   constructor() {}
   @Input()
   currentPage!: number;
@@ -25,11 +25,33 @@ export class PaginationComponent implements OnChanges{
   get total(): number {
     return Math.ceil(this.totalData / this.pageSize);
   }
-  get pages(): number[] {
-    const pages = [];
-    for (let i = 1; i <= this.total; i++) {
+  get pages(): any[] {
+    const pagesToShow = 3;
+    const startPage = Math.max(
+      1,
+      this.currentPage - Math.floor(pagesToShow / 2)
+    );
+    const endPage = Math.min(this.total, startPage + pagesToShow - 1);
+    const firstPage = 1;
+    const lastPage = this.total;
+
+    const pages = startPage > firstPage ? [firstPage] : [];
+
+    for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
     }
+    if(firstPage<startPage-1){
+      pages.splice(1,0,-1)
+    }
+    if (endPage < lastPage - 1) {
+      pages.push(-1);
+    }
+
+    if (endPage < lastPage) {
+      pages.push(lastPage);
+      pages.push();
+    }
+
     return pages;
   }
 
@@ -50,19 +72,12 @@ export class PaginationComponent implements OnChanges{
     }
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.products.subscribe(product=>{
-      console.log(product.length)
-      this.totalData=product.length
-    })
-    if(changes['products']){
-      this.currentPage=1
+    this.products.subscribe((product) => {
+      console.log(product.length);
+      this.totalData = product.length;
+    });
+    if (changes['products']) {
+      this.currentPage = 1;
     }
-
   }
-
- 
-
 }
-  
-
-

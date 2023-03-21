@@ -1,5 +1,5 @@
 <div class="flex justify-end">
-  <nav class="flex items-center space-x-2 m-3 text-md text-white  max-w-[500px] p-3 rounded-full font-bold" >
+  <nav class="flex items-center space-x-2 m-3 text-md text-white  max-w-[500px] p-3 rounded-md font-bold bg-slate-800"  >
     <button
     [hidden]="currentPage==1"
     (click)="prevBtn()"
@@ -8,11 +8,17 @@
     <span class="sr-only">Previous</span>
   </button>
     <ng-container *ngFor="let page of pages">
-      <button
-      class="m-2"
-      [ngClass]="{'pagination':page===currentPage}"
-      (click)="gotoPage(page)"
-       class="hover:text-blue-300 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
+      <ng-container *ngIf="page>0 " >
+
+        <button
+      
+        [ngClass]="{'pagination':page===currentPage}"
+        (click)="gotoPage(page)"
+         class="hover:text-blue-300 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
+      </ng-container>
+    <ng-container *ngIf="page=== -1 ">
+<span>.....</span>
+    </ng-container>
     </ng-container>
     
     
