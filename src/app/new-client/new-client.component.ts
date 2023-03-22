@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { of } from 'rxjs';
-import { Observable } from 'rxjs';
-import { notificationService } from 'src/app/services/notification.service';
-import { apiService } from 'src/app/http services/api.service';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { apiService } from 'src/app/http services/api.service';
+import { notificationService } from 'src/app/services/notification.service';
+import { GetFunctionService } from '../services/get-function.service';
 
 @Component({
   selector: 'app-new-client',
@@ -13,9 +13,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class NewClientComponent {
   constructor(
-    private http: HttpClient,
-    private toastr: notificationService,
-    private api: apiService
+    private readonly http: HttpClient,
+    private readonly toastr: notificationService,
+    private readonly api: apiService,
+    private readonly functinalServ:GetFunctionService
   ) {}
   @Input()
   clients$!:Observable<any>;
@@ -47,16 +48,7 @@ export class NewClientComponent {
         this.toastr.showSuccess(
           `New client with name ${body.first_name} added successfully`
         );
-        this.api.getApi('clients').subscribe({
-          next: (response: any) => {
-            console.log(response);
-            this.totalData=response.length;
-            this.clients$ = of(response);
-          },
-          complete: () => {
-            this.toOpenModel=false
-          },
-        });
+this.functinalServ.sendClickEvent()
       }
     });
   }

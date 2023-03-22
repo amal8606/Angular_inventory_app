@@ -1,286 +1,281 @@
-<div class="flex flex-col bg-black/80 max-h-[500rem] mb-3" style="overflow: hidden;">
-  <div class="-m-1.5 overflow-x-auto">
+<div class="bg-black/80 mx-auto" style="overflow: hidden">
+  <div class="-m-1.5 overflow-auto">
     <div class="p-1.5 min-w-full inline-block align-middle">
-      <div class="overflow-hidden">
-        <div class="">
-          <div class="flex items-center mb-6 mt-5 ms-3">
-            <div class="mr-6">
-              <label
-                for="hs-select-label"
-                class="block text-sm font-medium mb-2 dark:text-white"
-                >Filter Status</label
-              >
-              <select
-                (change)="setFilter($event)"
-                id="hs-select-label"
-                class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
-              >
-                <option value="">All products</option>
-                <option value="true">Only active products</option>
-                <option value="false">Only inactive products</option>
-              </select>
-            </div>
-            <div>
-              <label
-                for="hs-select-label"
-                class="block text-sm font-medium mb-2 dark:text-white"
-                >Filter Stock</label
-              >
-              <select
-                (change)="stockFilter($event)"
-                id="hs-select-label"
-                class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
-              >
-                <option value="none">All products</option>
-                <option value="1">Only products in stock</option>
-                <option value="0">Only products out of stock</option>
-              </select>
-            </div>
-            <div class="search">
-              <label
-                for="hs-search-box-with-loading-1"
-                class="block text-sm font-medium mb-2 dark:text-white"
-                >Search</label
-              >
-              <div class="relative">
-                <input
-                  [(ngModel)]="searchValue"
-                  (input)="searchProduct()"
-                  type="text"
-                  id="hs-search-box-with-loading-1"
-                  name="hs-search-box-with-loading-1"
-                  class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 py-3 px-20 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Input search"
-                />
-              </div>
-            </div>
+      <div>
+        <div class="flex justify-between mb-6 mt-5 ms-3">
+          <div class="mr-6">
+            <label
+              for="hs-select-label"
+              class="block text-sm font-medium mb-2 dark:text-white"
+              >Filter Status</label
+            >
+            <select
+              (change)="setFilter($event)"
+              id="hs-select-label"
+              class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+            >
+              <option value="">All products</option>
+              <option value="true">Only active products</option>
+              <option value="false">Only inactive products</option>
+            </select>
           </div>
-          <div
-            *ngIf="isloading"
-            class="flex max-w-[500px] mx-auto justify-center"
-          >
-            <div class="flex items-center pointer-events-none pl-10">
-              <div
-                class="animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-red-900 rounded-full"
-                role="status"
-                aria-label="loading"
-              >
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
-            <p class="m-3 italic bold text-white text-xl font-bold">Please Wait...</p>
-          </div>
-
           <div>
-            <button
-              (click)="createProduct()"
-              class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            <label
+              for="hs-select-label"
+              class="block text-sm font-medium mb-2 dark:text-white"
+              >Filter Stock</label
             >
-              create new product
-            </button>
-            <form
-            id="myDiv"
-              [formGroup]="addNewRow"
-              action=""
-              class="flex p-5"
-              [hidden]="!onEdit"
-              (ngSubmit)="addRow()"
+            <select
+              (change)="stockFilter($event)"
+              id="hs-select-label"
+              class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
             >
+              <option value="none">All products</option>
+              <option value="1">Only products in stock</option>
+              <option value="0">Only products out of stock</option>
+            </select>
+          </div>
+          <div class="search">
+            <label
+              for="hs-search-box-with-loading-1"
+              class="block text-sm font-medium mb-2 dark:text-white"
+              >Search</label
+            >
+            <div class="relative">
               <input
-                formControlName="name"
-                class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                [(ngModel)]="searchValue"
+                (input)="searchProduct()"
                 type="text"
-                placeholder="name"
+                id="hs-search-box-with-loading-1"
+                name="hs-search-box-with-loading-1"
+                class="transition ease-in-out delay-150 hover:-translate-y-1  hover:scale-110 duration-300 py-3 px-20 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Input search"
               />
-              <input
-                formControlName="price"
-                class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 ms-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500  "
-                type="number"
-                placeholder="price"
-              />
-              <input
-                formControlName="sku"
-                class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 ms-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
-                type="text"
-                placeholder="sku"
-              />
-              <input
-                formControlName="stock"
-                class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 ms-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500  "
-                type="number"
-                placeholder="stock"
-              />
-              <button
-                type="submit"
-                class="hover:-translate-y-1 hover:scale-110 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-green-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-              >
-                save
-              </button>
-              <button
-                type="button"
-                (click)="cancelChanges()"
-                class="hover:-translate-y-1 hover:scale-110 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-yellow-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-              >
-                cancel
-              </button>
-            </form>
+            </div>
           </div>
         </div>
-        <hr class="text-white">
-        <app-pagination
+        <div
+          *ngIf="isloading"
+          class="flex max-w-[500px] mx-auto justify-center"
+        >
+          <div class="flex items-center pointer-events-none pl-10">
+            <div
+              class="animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-red-900 rounded-full"
+              role="status"
+              aria-label="loading"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <p class="m-3 italic bold text-white text-xl font-bold">
+            Please Wait...
+          </p>
+        </div>
 
+        <div class="overflow-auto m-1">
+          <button
+            (click)="createProduct()"
+            class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+          >
+            create new product
+          </button>
+          <form
+            id="myDiv"
+            [formGroup]="addNewRow"
+            action=""
+            class="flex p-5"
+            [hidden]="!onEdit"
+            (ngSubmit)="addRow()"
+          >
+            <input
+              formControlName="name"
+              class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+              type="text"
+              placeholder="name"
+            />
+            <input
+              formControlName="price"
+              class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 ms-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+              type="number"
+              placeholder="price"
+            />
+            <input
+              formControlName="sku"
+              class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 ms-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+              type="text"
+              placeholder="sku"
+            />
+            <input
+              formControlName="stock"
+              class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 max-w-[200px] py-3 ms-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+              type="number"
+              placeholder="stock"
+            />
+            <button
+              type="submit"
+              class="hover:-translate-y-1 hover:scale-110 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-green-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+              save
+            </button>
+            <button
+              type="button"
+              (click)="cancelChanges()"
+              class="hover:-translate-y-1 hover:scale-110 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-yellow-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+              cancel
+            </button>
+          </form>
+        </div>
+      </div>
+      <hr class="text-white" />
+      <app-pagination
         [products]="userData$"
         [currentPage]="currentPage"
         [pageSize]="pageSize"
         (paginate)="pageChange($event)"
-        ></app-pagination>
-        <form [formGroup]="updateForm">
-          <table
-            class="min-w-full divide-y divide-gray-200"
-          >
-            <thead class="bg-white">
-              <tr>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-                >
-                  Active
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-                >
-                  Price
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-                >
-                  sku
-                </th>
-
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-                >
-                  Stock
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase"
-                >
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-              <tr
-                *ngFor="let product of userData$|pagination:currentPage : pageSize|async"
-                class="hover:bg-gray-100"
-                [formGroupName]="product.id"
-                [ngClass]="{
-                  'bg-red-300': product.stock == 0,
-                  'bg-green-300': product.stock != 0
-                }"
+      ></app-pagination>
+      <form [formGroup]="updateForm">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-white">
+            <tr>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
               >
-                <td
+                Active
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Name
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Price
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                sku
+              </th>
+
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Stock
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+              >
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            <tr
+              *ngFor="
+                let product of userData$
+                  | pagination : currentPage : pageSize
+                  | async
+              "
+              class="hover:bg-gray-100"
+              [formGroupName]="product.id"
+              [ngClass]="{
+                'bg-red-300': product.stock == 0,
+                'bg-green-300': product.stock != 0
+              }"
+            >
+              <td
+                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+              >
+                <input
+                  class="py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                  formControlName="enableEdit"
+                  (change)="UpdateStatus(product, $event)"
+                  type="checkbox"
+                  id="hs-basic-usage"
+                  class="relative w-[3.25rem] h-7 bg-gray-500 checked:bg-none checked:bg-blue-600 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 border border-transparent ring-1 ring-transparent focus:border-blue-600 focus:ring-blue-600 ring-offset-white focus:outline-none appearance-none dark:bg-gray-700 dark:checked:bg-blue-600 dark:focus:ring-offset-gray-800 before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
+                />
+                <label for="hs-basic-usage" class="sr-only">switch</label>
+              </td>
+              <td
+                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+              >
+                {{ product.name | uppercase }}
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                <p
+                  [hidden]="disableEditing(product)"
                   class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
                 >
-                  <input
-                    class="py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
-                    formControlName="enableEdit"
-                    (change)="UpdateStatus(product, $event)"
-                    
-                    type="checkbox"
-                    id="hs-basic-usage"
-                    class="relative w-[3.25rem] h-7 bg-gray-500 checked:bg-none checked:bg-blue-600 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 border border-transparent ring-1 ring-transparent focus:border-blue-600 focus:ring-blue-600 ring-offset-white focus:outline-none appearance-none dark:bg-gray-700 dark:checked:bg-blue-600 dark:focus:ring-offset-gray-800 before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
-                  />
-                  <label for="hs-basic-usage" class="sr-only">switch</label>
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 "
-                >
-                  {{ product.name | uppercase}}
-                </td>
+                  {{ product.price | currency : "USD" }}
+                </p>
+                <input
+                  [hidden]="!disableEditing(product)"
+                  (change)="setFormatCurrency(product, $event)"
+                  formControlName="price"
+                  type="string"
+                  class="py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                />
+              </td>
+              <td
+                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+              >
+                {{ product.sku }}
+              </td>
 
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 "
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-8000">
+                <p
+                  [hidden]="disableEditing(product)"
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 0"
                 >
-                  <p
-                    [hidden]="disableEditing(product)"
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  >
-                    {{ product.price | currency : "USD" }}
-                  </p>
-                  <input
-                    [hidden]="!disableEditing(product)"
-                    (change)="setFormatCurrency(product, $event)"
-                    formControlName="price"
-                    type="string"
-                    class="py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500  "
-                  />
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                  {{ product.stock }}
+                </p>
+                <input
+                  [hidden]="!disableEditing(product)"
+                  formControlName="stock"
+                  type="number"
+                  class="py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                />
+              </td>
+              <td
+                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+              >
+                <button
+                  (click)="updateValue(product)"
+                  [disabled]="disableUpdateButton(product)"
+                  type="button"
+                  class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
                 >
-                  {{ product.sku }}
-                </td>
-
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-8000"
+                  Update
+                </button>
+                <button
+                  routerLink="/products/{{ product.id }}"
+                  type="button"
+                  class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                 >
-                  <p
-                    [hidden]="disableEditing(product)"
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 0"
-                  >
-                    {{ product.stock }}
-                  </p>
-                  <input
-                    [hidden]="!disableEditing(product)"
-                    formControlName="stock"
-                    type="number"
-                    class="py-3 border px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                  view
+                </button>
+                <button
+                  [hidden]="!disableEditing(product)"
+                  (click)="deleteRow(product.id)"
+                  type="button"
+                  class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                 >
-                  <button
-                    (click)="updateValue(product)"
-                    [disabled]="disableUpdateButton(product)"
-                    type="button"
-                    class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm "
-                  >
-                    Update
-                  </button>
-                  <button
-                    routerLink="/products/{{ product.id }}"
-                    type="button"
-                    class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                  >
-                    view
-                  </button>
-                  <button
-                    [hidden]="!disableEditing(product)"
-                    (click)="deleteRow(product.id)"
-                    type="button"
-                    class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
     </div>
   </div>
- 
 </div>

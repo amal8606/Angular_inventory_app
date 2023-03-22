@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { PaginationComponent } from 'src/app/pagination/pagination.component';
-import { of } from 'rxjs';
-import { Observable } from 'rxjs';
-import { notificationService } from 'src/app/services/notification.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, of, Subscription } from 'rxjs';
 import { apiService } from 'src/app/http services/api.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GetFunctionService } from 'src/app/services/get-function.service';
+import { notificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-clients',
@@ -14,9 +13,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ClientsComponent implements OnInit {
   constructor(
-    private http: HttpClient,
-    private toastr: notificationService,
-    private api: apiService
+    private readonly http: HttpClient,
+    private readonly toastr: notificationService,
+    private readonly api: apiService,
+    private readonly functionServ:GetFunctionService
   ) {}
   public clients$!: Observable<any>;
   currentPage: number = 1;
@@ -28,6 +28,9 @@ export class ClientsComponent implements OnInit {
   get total(): number {
     return Math.ceil(this.totalData / this.pageSize);
   }
+  public clickEventSubscription:Subscription=this.functionServ.getClickEvent().subscribe(()=>{
+    this.getClients()
+  })
   get pages(): any[] {
     const pagesToShow = 3;
     const startPage = Math.max(
@@ -118,6 +121,9 @@ export class ClientsComponent implements OnInit {
     this.createClient.reset();
   }
   ngOnInit(): void {
+    this.getClients();
+  }
+  private getClients() {
     this.clients$ = this.http.get<{
       id: Number;
       first_name: string;
@@ -133,19 +139,13 @@ export class ClientsComponent implements OnInit {
       this.totalData = client.length;
     });
   }
+
   deleteRow(id: number) {
     if (confirm('Are you sure, want to delete the field ?..')) {
       this.http.delete(`${this.url}/${id}`).subscribe((response: any) => {
         if (response) {
           this.toastr.showSuccess('deleted successfully...');
-          this.api.getApi('clients').subscribe({
-            next: (response: any) => {
-              console.log(response);
-              this.totalData=response.length
-              this.clients$ = of(response);
-            },
-            complete: () => {},
-          });
+        this.getClients()
         }
       });
     }

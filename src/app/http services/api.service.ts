@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn:'root'
@@ -13,19 +14,20 @@ export class apiService{
 
     }
     public url='https://api-sales-app.josetovar.dev'
-getApi(endpoint:any){
+getApi(endpoint:any):Observable<any>{
    return this.http.get(`${this.url}/${endpoint}`)
 }
 
-getSingleProduct(productId:any):any{
+getSingleProduct(productId:any):Observable<any>{
     return this.http.get(`${this.url}/products/${productId}`)
 
 }
-updateSingleProduct(product:any){
+updateSingleProduct(product:any):Observable<any>{
     return this.http.put(`${this.url}/products`,product)
 }
-addProduct(product:any){
+addProduct(product:any):Observable<any>{
     return this.http.post(`${this.url}/products`,product)
 }
+
 
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { apiService } from '../../../http services/api.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Observable, of, map, filter } from 'rxjs';
-import { notificationService } from '../../../services/notification.service';
 import { formatCurrency } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { map, Observable, of } from 'rxjs';
+import { apiService } from '../../../http services/api.service';
+import { notificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,6 +42,9 @@ export class DashboardComponent implements OnInit {
     active: new FormControl(false),
   });
   ngOnInit(): void {
+    this.getProducts();
+  }
+  private getProducts() {
     this.isloading = true;
     this.userData$ = this.http.get<{
       id: number;
@@ -75,13 +78,14 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
+
   pageChange(pageNumber: number) {
     this.currentPage = pageNumber;
   }
   /////Filter///////////////////////
   public setFilter(activeEvent: any): void {
     this.currentPage=1
-    this.userData$ = this.http.get(this.url).pipe(
+    this.userData$ = this.api.getApi('products').pipe(
       map((products: any) => {
         if (activeEvent.target.value) {
           const newProduct = products.filter(
@@ -211,15 +215,7 @@ export class DashboardComponent implements OnInit {
           this.isloading = true;
 
           this.toastr.showSuccess('deleted successfully...');
-          this.api.getApi(this.endpoint).subscribe({
-            next: (response: any) => {
-              console.log(response);
-              this.userData$ = of(response);
-            },
-            complete: () => {
-              this.isloading = false;
-            },
-          });
+      this.getProducts()
         }
       });
     }
@@ -241,18 +237,12 @@ export class DashboardComponent implements OnInit {
   addRow() {
     const { name, price, sku, stock } = this.addNewRow.value;
     console.log(this.addNewRow.value);
-    this.http.post(this.url, this.addNewRow.value).subscribe((res) => {
+    this.api.addProduct(this.addNewRow.value).subscribe((res) => {
       if (res) {
         this.toastr.showSuccess('New product added successfully!');
-        this.http.get(`${this.url}`).subscribe({
-          next: (response: any) => {
-            console.log(response);
-            this.userData$ = of(response);
-          },
-          complete: () => {
-        
-          },
-        });
+   this.getProducts()
+   this.addNewRow.reset()
+   this.onEdit = false
       }
     });
   }
