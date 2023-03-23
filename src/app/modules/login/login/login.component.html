@@ -1,21 +1,3 @@
-<!-- <div class="forms">
-    <form action="" id="form" [formGroup]="loginForm" (ngSubmit)="login()">
-        <div  class="formItem">
-            <label for="email" class="formItem">email</label>
-            <input type="email" id="email" class="formItem" formControlName="email">
-        </div>
-        <div  class="formItem">
-            <label for="password">password</label>
-            <input type="password" id="password" class="formItem" formControlName="password">
-        </div>
-        <div class="formItem">
-            <input [disabled]="!this.loginForm.valid" type="submit" value="Login">
-            <a routerLink="/password" class="formItem">forgot password..?</a>
-            <p [hidden]="!toShow" style="color:red">Incorrect email or password</p>
-        </div>
-        
-    </form>
-</div> -->
 <div class="bg-black/80 cover pt-[100px] pb-[300px] " style="height:100%;width: 100%; ">
   <section class="login-form">
    
@@ -35,7 +17,7 @@
        
         <div class="mb-6">
           <label
-            for="input-label-with-helper-text"
+            
             class="block text-sm font-medium mb-2"
             >Email</label
           >
@@ -54,14 +36,13 @@
           </p>
         </div>
         <label
-          for="input-label-with-helper-text"
+
           class="block text-sm font-medium mb-2"
           >password</label
         >
         <input
           formControlName="password"
           type="password"
-          id="input-label-with-helper-text"
           class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
           placeholder="you@site.com"
           aria-describedby="hs-input-helper-text"
@@ -70,7 +51,7 @@
         <p
           *ngIf="this.loginForm.controls.password.errors?.['required'] && this.loginForm.controls.password.touched"
           class="text-sm text-red-500 mt-2"
-          id="hs-input-helper-text"
+          
         >
           password is required
         </p>
@@ -91,4 +72,3 @@
   </div>
  
 </div>
-

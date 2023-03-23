@@ -235,7 +235,7 @@ export class DashboardComponent implements OnInit {
     this.onEdit = true;
   }
   addRow() {
-    const { name, price, sku, stock } = this.addNewRow.value;
+    const { name, price, sku, stock,active} = this.addNewRow.value;
     console.log(this.addNewRow.value);
     this.api.addProduct(this.addNewRow.value).subscribe((res) => {
       if (res) {
@@ -248,5 +248,6 @@ export class DashboardComponent implements OnInit {
   }
   cancelChanges() {
     this.onEdit = false;
+    this.addNewRow.reset()
   }
 }

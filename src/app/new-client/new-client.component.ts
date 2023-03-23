@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { apiService } from 'src/app/http services/api.service';
 import { notificationService } from 'src/app/services/notification.service';
 import { GetFunctionService } from '../services/get-function.service';
 
@@ -15,7 +14,6 @@ export class NewClientComponent {
   constructor(
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
-    private readonly api: apiService,
     private readonly functinalServ:GetFunctionService
   ) {}
   @Input()
@@ -42,13 +40,22 @@ export class NewClientComponent {
   createNewClient() {
     const body = this.createClient.value;
     console.log(body);
-    this.http.post(`${this.url}`, body).subscribe((response) => {
-      if (response) {
-        console.log(response)
-        this.toastr.showSuccess(
-          `New client with name ${body.first_name} added successfully`
-        );
-this.functinalServ.sendClickEvent()
+    this.http.post(`${this.url}`, body).subscribe({
+      next:(response) => {
+        if (response) {
+          console.log(response)
+          this.toastr.showSuccess(
+            `New client with name ${body.first_name} added successfully`
+          );
+  this.functinalServ.sendClickEvent()
+        }
+      },
+      error:()=>{
+        this.toastr.showError("Something went wrong, try again later");
+      },
+      complete:()=>{
+        this.createClient.reset();
+        this.toOpenModel=false;
       }
     });
   }

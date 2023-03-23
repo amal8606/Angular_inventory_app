@@ -1,4 +1,5 @@
-<div class="bg-black/80 mx-auto" style="overflow: hidden">
+<div class="overflow-auto bg-black/80">
+<div class="" style="overflow:hidden;">
   <div class="-m-1.5 overflow-auto">
     <div class="p-1.5 min-w-full inline-block align-middle">
       <div>
@@ -41,7 +42,7 @@
               class="block text-sm font-medium mb-2 dark:text-white"
               >Search</label
             >
-            <div class="relative">
+            <div class="relative mr-3">
               <input
                 [(ngModel)]="searchValue"
                 (input)="searchProduct()"
@@ -111,6 +112,16 @@
               type="number"
               placeholder="stock"
             />
+            <div class="grid ms-3">
+              <label
+              class="text-white"
+               for="">Active</label>
+              <input
+              formControlName="active"
+             
+               type="checkbox">
+            </div>
+           
             <button
               type="submit"
               class="hover:-translate-y-1 hover:scale-110 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-green-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
@@ -278,4 +289,5 @@
       </form>
     </div>
   </div>
+</div>
 </div>

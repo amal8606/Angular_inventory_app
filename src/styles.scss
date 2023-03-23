@@ -22,8 +22,10 @@ body{
         @apply border-2 border-black mt-5 max-w-[500px] py-3 border px-4 block w-full border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500
     }
     .activeUrl{
-        @apply  text-red-900 bg-slate-300/50;
+        @apply  text-red-900 bg-slate-300/50
     }
     
-   
+   a{
+    text-decoration: none;
+   }
 }

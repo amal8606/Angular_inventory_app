@@ -1,22 +1,22 @@
 
-<div class="bg-black/80 cover pt-[100px] pb-[225px]" style="height:100%;width: 100%; overflow-y: hidden;">
+<div class="bg-black/80 cover pt-[100px] pb-[225px] overflow-hidden" style="height:100%;width: 100%;">
   <section >
     <form action="" [formGroup]="registerForm" (ngSubmit)="getPassword()">
       <div class=" max-w-[350px] mx-auto shadow-md p-6 bg-white text-black rounded-md border border-transparent">
         <h2 class="m-6">Register</h2>
         <div class="mb-6">
           <label
-            for="input-label-with-helper-text"
+            
             class="block text-sm font-medium mb-2"
             >First Name</label
           >
           <input
             formControlName="first_name"
             type="text"
-            id="input-label-with-helper-text"
+    
             class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             placeholder="you@site.com"
-            aria-describedby="hs-input-helper-text"
+        
           />
           <p
           *ngIf="this.registerForm.controls.first_name.errors?.['required'] && this.registerForm.controls.first_name.touched"
@@ -26,17 +26,17 @@
         </div>
         <div class="mb-6">
             <label
-              for="input-label-with-helper-text"
-              class="block text-sm font-medium mb-2 "
+      
+              class="block text-sm font-medium mb-3"
               >Last Name</label
             >
             <input
               formControlName="last_name"
               type="text"
-              id="input-label-with-helper-text"
+        
               class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
               placeholder="you@site.com"
-              aria-describedby="hs-input-helper-text"
+  
             />
             <p
             *ngIf="this.registerForm.controls.last_name.errors?.['required'] && this.registerForm.controls.last_name.touched"

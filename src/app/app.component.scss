@@ -23,8 +23,27 @@ header{
 }
 .active{
     color: yellow;
-    background-color: rgb(60, 63, 63);
+    background-color: rgb(6, 107, 107);
     padding: 20px;
     border-radius: 30px;
 
 }
+.nav-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  
+  .nav-fixed {
+   
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTb3Ya9eTNhr60zcXc9GJ8SrcAD26AdE5aIg&usqp=CAU');
+    background-repeat: no-repeat;
+background-size:cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
