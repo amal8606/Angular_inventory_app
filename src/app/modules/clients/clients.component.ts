@@ -136,9 +136,12 @@ export class ClientsComponent implements OnInit {
       email: string;
     }>(this.url);
     this.clients$.subscribe((client) => {
+      console.log(client)
       this.totalData = client.length;
     });
   }
+
+
 
   deleteRow(id: number) {
     if (confirm('Are you sure, want to delete the field ?..')) {

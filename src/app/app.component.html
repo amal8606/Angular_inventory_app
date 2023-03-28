@@ -14,8 +14,24 @@
 </div>
 </div> -->
 <div>
+  <app-sidebar *ngIf="ToShowsideBar"></app-sidebar>
   <header
    class=" flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-red-800 text-sm py-2  top-0  " [ngClass]="{'nav-scroll': !isFixed, 'nav-fixed': isFixed}">
+   <button
+   [hidden]="ToShowsideBar"
+   (click)="ToShowsideBar=true"
+   type="button" class="text-gray-500 hover:text-gray-600">
+    <span class="sr-only">Toggle Navigation</span>
+    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+    </svg>
+  </button>
+  <button 
+  [hidden]="!ToShowsideBar"
+   (click)="ToShowsideBar=false"
+   type="button" class="text-gray-500 hover:text-gray-600">
+   <i class="fa-solid fa-rectangle-xmark fa-beat fa-2xl m-2"></i>
+  </button>
     <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
       <div class="flex items-center justify-between">
         <img class="hover:-translate-y-1 hover:scale-110 duration-300 max-w-[50px] hover:max-w-[60px] rounded-full border border-transparent mr-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh9y-SpSQPWVMKemxhlCvmVbPFnxiKdLsG1g&usqp=CAU" alt="">
@@ -33,6 +49,6 @@
   </header>
 </div>
 
-<div class="mt-[6rem] sm:mt-[6rem]">
-  <router-outlet></router-outlet>
+<div class="mt-[6rem] sm:mt-[6rem]" #myDiv>
+  <router-outlet ></router-outlet>
 </div>

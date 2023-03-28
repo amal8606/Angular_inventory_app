@@ -14,6 +14,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { notificationService } from './services/notification.service';
 import { TokenInterceptor } from './authentication/token.interceptor';
+import { SidebarComponent } from './sidebar/sidebar.component';
+
 
 // import { tokenInterceptor } from './authentication/token.intercept';
 
@@ -24,6 +26,8 @@ import { TokenInterceptor } from './authentication/token.interceptor';
     ShowPasComponent,
     SimpleProductComponent,
     HomeComponent,
+    SidebarComponent
+    
    
 
   

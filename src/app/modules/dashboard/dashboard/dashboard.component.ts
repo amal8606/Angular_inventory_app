@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
     this.userData$.subscribe({
       next: (products) => {
         this.totalData = products.length;
+        console.log(products)
         products.map((product: any) => {
           this.updateForm.addControl(
             `${product.id}`,
@@ -142,7 +143,7 @@ export class DashboardComponent implements OnInit {
     const status = event.target.checked;
     this.http
       .put(
-        `https://api-sales-app.josetovar.dev/product-status/${product.id}?status=${status}`,
+        `https://api-sales-app.josetovar.dev/products/status/${product.id}?status=${status}`,
         {}
       )
       .subscribe({
