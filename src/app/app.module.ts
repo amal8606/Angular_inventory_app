@@ -15,6 +15,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { notificationService } from './services/notification.service';
 import { TokenInterceptor } from './authentication/token.interceptor';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ViewsalesComponent } from './viewsales/viewsales.component';
+import { GenerateDataService } from './services/generate-data.service';
 
 
 // import { tokenInterceptor } from './authentication/token.intercept';
@@ -26,7 +28,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ShowPasComponent,
     SimpleProductComponent,
     HomeComponent,
-    SidebarComponent
+    SidebarComponent,
+    ViewsalesComponent
     
    
 
@@ -52,7 +55,7 @@ ToastrModule.forRoot({
 
 )
   ],
-  providers: [LoginGuard,apiService,notificationService,
+  providers: [LoginGuard,apiService,notificationService,GenerateDataService,
     {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}
  ],
   bootstrap: [AppComponent]

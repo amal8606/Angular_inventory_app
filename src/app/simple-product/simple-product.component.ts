@@ -26,7 +26,7 @@ export class SimpleProductComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.params.subscribe((params) => {
       this.service
-        .getSingleProduct(params['productId'])
+        .getSingleProduct(params['productId'],'products')
         .subscribe((response: any) => {
           this.product = response;
           console.log(this.product);

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
+import { GenerateDataService } from '../services/generate-data.service';
 import { GetFunctionService } from '../services/get-function.service';
 import { notificationService } from '../services/notification.service';
 @Component({
@@ -12,11 +13,17 @@ import { notificationService } from '../services/notification.service';
 export class CreateSalesComponent implements OnInit{
   constructor(private readonly http:HttpClient,
     private readonly toastr:notificationService,
-    private readonly functionServ:GetFunctionService){}
+    private readonly functionServ:GetFunctionService,
+    private readonly dataServ:GenerateDataService){}
 addSale=false;
 info=false;
+showDiv=false;
 clients$!: Observable<any>;
+products$!: Observable<any>;
+Showtable=false;
+
 searchValue!:string;
+productValue!:string;
 url = 'https://api-sales-app.josetovar.dev';
 
 public saleForm:FormGroup=new FormGroup({
@@ -34,42 +41,30 @@ public addProductTolist(){
   this.saleProducts.push(newProduct);
 
 }
+
 public removeProduct(productIndex:any){
   this.saleProducts.removeAt(productIndex)
 }
 ngOnInit(): void {
-  this.getClients();
-}
-private getClients() {
-  this.clients$ = this.http.get<{
-    id: Number;
-    first_name: string;
-    last_name: string;
-    address: string;
-    city: string;
-    state: string;
-    country: string;
-    phone: string;
-    email: string;
-  }>(`${this.url}/clients`);
-  this.clients$.subscribe((client) => {
-    console.log(client)
-
-  });
+ this.clients$= this.dataServ.getClients();
+ this.clients$.subscribe()
+ this.products$=this.dataServ.getProducts()
+ this.products$.subscribe()
 }
 searchName(){
-
+this.showDiv=true
 this.clients$=this.clients$.pipe(map(client=>{
   return client.filter((client:any)=>client.first_name.toLowerCase().includes(this.searchValue.toLowerCase()))}))
 }
 
 selectClient(clientId:any,value:string){
+  this.showDiv=false
   console.log(clientId)
   this.saleForm.get('client_id')?.setValue(clientId)
   console.log(this.saleForm.value)
   this.searchValue=value
+ 
 
-  this.info=true
 }
 sendNewSales(){
 
@@ -79,6 +74,9 @@ sendNewSales(){
       console.log(response)
       this.saleForm.reset()
       this.addSale=false
+      this.searchValue=''
+this.Showtable=false
+
       this.functionServ.sendClickEvent()
     },
     error:(error)=>{
@@ -88,6 +86,24 @@ sendNewSales(){
   })
   console.log(this.saleForm.value)
 }
+setProductId(){
+
+}
+closeSales(){
+  this.addSale=false;
+  this.showDiv=false
+  this.searchValue='';
+  this.saleForm.reset();
+  this.saleProducts.clear()
+this.Showtable=false
+
+}
+showtable(){
+  this.Showtable=true;
+  this,this.products$=this.products$.pipe(map(product=>{
+    return product.filter((product:any)=>product.active==true)}))
+  }
+
 }
 
 

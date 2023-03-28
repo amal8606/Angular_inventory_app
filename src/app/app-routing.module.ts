@@ -5,11 +5,12 @@ import { HomeComponent } from './home/home.component';
 
 import { ShowPasComponent } from './show-pas/show-pas.component';
 import { SimpleProductComponent } from './simple-product/simple-product.component';
+import { ViewsalesComponent } from './viewsales/viewsales.component';
 
 const routes: Routes = [
  
   {path:'password',component:ShowPasComponent},
-  
+  {path:'sales/:sale_id',component:ViewsalesComponent},
   {path:'products/:productId',component:SimpleProductComponent},
   {path:'home',component:HomeComponent},
   {path:'',component:HomeComponent},

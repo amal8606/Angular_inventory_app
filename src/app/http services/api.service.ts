@@ -18,10 +18,11 @@ getApi(endpoint:any):Observable<any>{
    return this.http.get(`${this.url}/${endpoint}`)
 }
 
-getSingleProduct(productId:any):Observable<any>{
-    return this.http.get(`${this.url}/products/${productId}`)
+getSingleProduct(productId:any,endpoint:any):Observable<any>{
+    return this.http.get(`${this.url}/${endpoint}/${productId}`)
 
 }
+
 updateSingleProduct(product:any):Observable<any>{
     return this.http.put(`${this.url}/products`,product)
 }
