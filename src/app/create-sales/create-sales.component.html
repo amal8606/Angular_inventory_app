@@ -151,7 +151,8 @@
             <tr>
               <td>{{ product.id }}</td>
               <td>{{ product.name}}</td>
-              <td>{{ product.stock}}</td>
+              <td *ngIf="product.stock>0" >{{ product.stock}}</td>
+              <td *ngIf="product.stock==0"  class="text-red-400">Sold Out</td>
               <td></td>
 
             </tr>

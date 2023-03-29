@@ -52,6 +52,7 @@
         <p class="mt-1 text-white">
           Total Products in Cart: {{ sales?.items.length }}
         </p>
+        <p class="text-white">total amount: {{sales?.total|currency:('USD')}}</p>
 
         <p class="mt-1 text-white">createdAt : {{ createdDate }}</p>
         <button
