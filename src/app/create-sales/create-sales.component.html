@@ -5,19 +5,21 @@
   Add Sale
   <i class="fa-sharp fa-solid fa-plus"></i>
 </button>
-<div style="position: fixed; top: 3rem; z-index: 1000; left: 10rem;bottom: 10rem;">
+<div
+  style="position: fixed; top: 3rem; z-index: 1000; left: 50rem; bottom: 10rem"
+>
   <div
     *ngIf="addSale"
-    class="w-[100rem] h-full fixed top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
+    class="w-full h-full fixed top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
   >
     <div
-      class="opacity-100 duration-500 opacity-0 transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto"
+      class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[80rem] lg:w-full m-3 lg:mx-auto bottom-4"
     >
-      <div class="flex flex-col bg-white/90 border shadow-sm rounded-xl">
+      <div class="flex flex-col bg-white border shadow-sm rounded-xl">
         <div
           class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"
         >
-          <h3 class="font-bold text-gray-800">Add Client</h3>
+          <h3 class="font-bold text-white">Add Product</h3>
           <button
             (click)="closeSales()"
             type="button"
@@ -39,127 +41,172 @@
             </svg>
           </button>
         </div>
-        <div class="p-4 overflow-y-auto">
-          <div class="flex"> 
+        <div class="p-4 overflow-y-auto flex">
+          <div class="max-w-[40rem]">
             <div>
-          <div>
-            <label
+              <label
+                for="hs-leading-icon"
+                class="block text-sm font-medium mb-2 text-black"
+                >search For client</label
+              >
+              <div class="relative">
+                <input
+                  [(ngModel)]="searchValue"
+                  (input)="searchName()"
+                  type="text"
+                  id="hs-leading-icon"
+                  name="hs-leading-icon"
+                  class="py-3 px-4 pl-11 block w-full border-gray-500 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Enter client name"
+                />
+                <div
+                  class="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4"
+                ></div>
+              </div>
+
+              <div class="max-h-[200px] overflow-y-auto">
+                <div *ngFor="let client of clients$ | async">
+                  <ng-container *ngIf="showDiv">
+                    <div
+                      (click)="selectClient(client.id, client.first_name)"
+                      class="hover:bg-gray-500 hover:text-red-300 max-w-[20rem]"
+                    >
+                      <p>
+                        {{ client.first_name }}
+                      </p>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div [hidden]="viewProducts">
+              <p class="text-red-400">Select one client to do Purchase</p>
+            </div>
+            <div class=" m-3" *ngIf="viewProducts">
+              <label
               for="hs-leading-icon"
-              class="block text-sm font-medium mb-2 text-white"
-              >search For client</label
-            >
-            <div class="relative">
+              class="block text-sm font-medium mb-2 text-black"
+              >search For products</label>
               <input
-                [(ngModel)]="searchValue"
-                (input)="searchName()"
+                [(ngModel)]="searchProductValue"
+                (input)="showtable()"
                 type="text"
                 id="hs-leading-icon"
                 name="hs-leading-icon"
-                class="py-3 px-4 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
-                placeholder="Enter client name"
+                class="py-3 px-4 pl-11 block w-full border-gray-500 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Enter product name"
               />
-              <div
-                class="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4"
+              <div class="max-h-[300px] overflow-y-auto m-2">
+                <table
+                *ngIf="Showtable"
+                class="min-w-full divide-y divide-white mt-5 "
               >
-
+                <thead class="bg-slate-400">
+                  <th>Id</th>
+                  <th>name</th>
+                  <th>Available stock</th>
+                  <th></th>
+                  <th>
+                    <i
+                      (click)="Showtable = false"
+                      class="fa-regular fa-rectangle-xmark fa-lg"
+                    ></i>
+                  </th>
+                </thead>
+                <tbody
+                  *ngFor="let product of products$ | async"
+                  class="text-black bg-gray-200"
+                >
+                  <tr>
+                    <td >{{ product.id }}</td>
+                    <td class="px-3 py-2 whitespace-nowrap">{{ product.name }}</td>
+                    <td *ngIf="product.stock > 0" class="px-3 py-4 whitespace-nowrap">{{ product.stock }}</td>
+                    <td *ngIf="product.stock == 0" class="text-red-400 px-3 py-4 whitespace-nowrap">
+                      Sold Out
+                    </td>
+                    <td class="px-3 py-2 whitespace-nowrap">
+                      <button
+                        [hidden]="product.stock == 0"
+                        (click)="addProductTolist(product.id)"
+                        class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+                      >
+                      <i class="fa-sharp fa-solid fa-plus"></i>
+                      </button>
+                    </td>
+                    <td class="px-3 py-4 whitespace-nowrap"></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+             
             </div>
-            </div>
-         
-            <ng-container>
-               
-                    <div *ngFor="let client of clients$ | async">
-                        <ng-container *ngIf="showDiv">
-                      <tr>
-                        <a
-                        (click)="selectClient(client.id,client.first_name)"
-                        >
-                          {{ client.first_name }}
-                        </a>
-                      </tr>
-                    
-                  </ng-container>
-                
-                    </div>
-            </ng-container>
-            
-           
-
-            <button
-              (click)="addProductTolist()"
-              class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
-            >
-              add Products
-            </button>
           </div>
-          <div class="max-h-[200px] overflow-y-auto">
-
-          <form action="" [formGroup]="saleForm" >
-            <ng-container formArrayName="products">
-              <ng-container
-                *ngFor="let product of saleProducts.controls; let i = index"
+          <div class="max-w-[40rem] mx-auto bg-gray-100 w-[50rem] top-0 pt-3">
+            <div class="max-w-[200px] mx-auto top-3">
+              <h2>cart <i class="fa-sharp fa-solid fa-cart-shopping" style="color: rgb(211, 20, 20);"></i></h2>
+              
+            </div>
+            <hr class=" text-red-500">
+            <div class="mx-auto max-w-[300px] mt-5" *ngIf="saleProducts.length==0">
+              <i class="fa-sharp fa-solid fa-circle-info fa-2xl" style="margin-left: 9rem; "></i>
+            <p class="text-blue-600 mt-3">Your cart is empty please add products...</p>
+            </div>
+  <div class="grid">
+    <div class="max-h-[200px] overflow-y-auto m-5">
+      <form action="" [formGroup]="saleForm">
+        <ng-container formArrayName="products">
+          <ng-container
+            *ngFor="let product of saleProducts.controls; let i = index"
+          >
+            <div class="flex justify-center" formGroupName="{{ i }}">
+              <div>
+                <label for="products">product Id</label>
+                <input
+                  formControlName="id"
+                  type="number"
+                  class="py-3 px-4 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
+                />
+              </div>
+              <div class="ms-2">
+                <label for="products">Quantity</label>
+                <input
+                  formControlName="quantity"
+                  type="number"
+                  class="py-3 px-2 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
+                />
+              </div>
+              <button
+                (click)="removeProduct(i)"
+                class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
               >
-                <div class="flex justify-between" formGroupName="{{i}}">
-                  <div>
-                    <label for="products">products</label>
-                    <input
-                    formControlName="id"
-                      type="number"
-                      class="py-3 px-4 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
-                    />
-                  </div>
-                  <div class="ms-2">
-                    <label for="products">Quantity</label>
-                    <input
-                    formControlName="quantity"
+              <i class="fa-sharp fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
+      </form>
+    </div>
+    <div class="m-6" *ngIf="saleProducts.length>0">
+      <button
+      
+      [disabled]="!saleForm.valid"
+      (click)="sendNewSales()"
+      class="disabled:cursor-not-allowed py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800 disabled:bg-slate-400"
+    >
+      Confirm
+    </button>
+    <button
+    (click)="clearCart()"
+    class="disabled:cursor-not-allowed py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-white ms-3 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800 disabled:bg-slate-400"
+  >
+    clear
+  </button>
+    </div>
+  </div>
+          </div>
 
-                      type="number"
-                      class="py-3 px-2 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
-                    />
-                  </div>
-                  <button
-                    (click)="removeProduct(i)"
-                    class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
-                  >
-                    remove Product
-                  </button>
-                </div>
-              </ng-container>
-            </ng-container>
-          </form>
+        
         </div>
-
-        </div>
-      </div>
-        <div >
-          <button
-          (click)="showtable()"
-          class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
-        >
-          Show Active products
-          <i class="fa-sharp fa-solid fa-plus"></i>
-        </button>
-        <table *ngIf="Showtable" class="min-w-full divide-y divide-gray-200 mt-5">
-          <thead class="bg-slate-400">
-            <th>Id</th>
-            <th>name</th>
-            <th>Available stock</th>
-            <th><i 
-              (click)="Showtable=false"
-              class="fa-regular fa-rectangle-xmark fa-lg"></i></th>
-          </thead>
-          <tbody *ngFor="let product of products$|async" class="text-black bg-gray-200">
-            <tr>
-              <td>{{ product.id }}</td>
-              <td>{{ product.name}}</td>
-              <td *ngIf="product.stock>0" >{{ product.stock}}</td>
-              <td *ngIf="product.stock==0"  class="text-red-400">Sold Out</td>
-              <td></td>
-
-            </tr>
-          </tbody>
-        </table>
-        </div>
-      </div>
         <div
           class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700"
         >
@@ -171,13 +218,7 @@
           >
             Close
           </button>
-          <button
-          [disabled]="!saleForm.valid"
-          (click)="sendNewSales()"
-            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-          >
-            Save changes
-          </button>
+        
         </div>
       </div>
     </div>

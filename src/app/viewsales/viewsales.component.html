@@ -54,7 +54,7 @@
         </p>
         <p class="text-white">total amount: {{sales?.total|currency:('USD')}}</p>
 
-        <p class="mt-1 text-white">createdAt : {{ createdDate }}</p>
+        <p class="mt-1 text-white">createdAt : {{ sales?.created_at|date }}</p>
         <button
           (click)="showCart = true"
           class="m-4 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-slate-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
@@ -66,22 +66,27 @@
         <div *ngIf="showCart" class="overflow-auto">
           <table class="min-w-full divide-y divide-gray-200 mt-5">
             <thead class="bg-white">
-              <th>Product Name</th>
-              <th>price</th>
-              <th><i 
+              <th class="px-3 py-4 whitespace-nowrap">Product Name</th>
+              <th class="px-3 py-4 whitespace-nowrap">price</th>
+              <th class="px-3 py-4 whitespace-nowrap"><i 
                 (click)="showCart=false"
                 class="fa-regular fa-rectangle-xmark fa-lg"></i></th>
             </thead>
             <tbody *ngFor="let product of products" class="text-white">
               <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price | currency : "USD" }}</td>
-                <td><i class="fa-sharp fa-solid fa-trash" style="color: rgb(212, 199, 199);"></i></td>
+                <td class="px-3 py-4 whitespace-nowrap">{{ product.name }}</td>
+                <td class="px-3 py-4 whitespace-nowrap">{{ product.price | currency : "USD" }}</td>
+                <td class="px-3 py-4 whitespace-nowrap"> <i class="fa-sharp fa-solid fa-trash" style="color: rgb(212, 199, 199);"></i></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+    </div>
+    <div class="m-3  ">
+      <a
+      class="hover:text-lg hover:-translate-y-1 duration-300"
+       routerLink="/dashboard/sales"><i class="fa-solid fa-arrow-left fa-md" style="color:white"> Back</i></a>
     </div>
   </div>
 </div>

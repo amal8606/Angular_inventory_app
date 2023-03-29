@@ -20,9 +20,58 @@ export class SalesComponent {
   public products$!:Observable<any>;
   public sales$!:Observable<any>;
   searchValue!:string;
+  currentPage: number = 1;
+  pageSize: number = 4;
+  totalData!: number;
   filteredClients=[]
 url="https://api-sales-app.josetovar.dev"
-  ngOnInit(): void {
+get total(): number {
+  return Math.ceil(this.totalData / this.pageSize);
+}
+get pages(): any[] {
+  const pagesToShow = 3;
+  const startPage = Math.max(
+    1,
+    this.currentPage - Math.floor(pagesToShow / 2)
+  );
+  const endPage = Math.min(this.total, startPage + pagesToShow - 1);
+  const firstPage = 1;
+  const lastPage = this.total;
+
+  const pages = startPage > firstPage ? [firstPage] : [];
+
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+  if(firstPage<startPage-1){
+    pages.splice(1,0,-1)
+  }
+  if (endPage < lastPage - 1) {
+    pages.push(-1);
+  }
+
+  if (endPage < lastPage) {
+    pages.push(lastPage);
+   
+  }
+
+  return pages;
+}
+gotoPage(page: number) {
+  this.currentPage = page;
+}
+
+prevBtn() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+}
+nxtBtn() {
+  if (this.currentPage <= this.total) {
+    this.currentPage++;
+  }
+}
+ngOnInit(): void {
   
     this.getSales()
   }
@@ -59,7 +108,7 @@ url="https://api-sales-app.josetovar.dev"
       
     }>(`${this.url}/sales`);
     this.sales$.subscribe((client) => {
-      console.log(client)
+      this.totalData = client.length;
 
     });
   }

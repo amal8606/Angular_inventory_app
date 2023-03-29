@@ -39,7 +39,7 @@ export class LoginComponent {
                JSON.stringify(response.access_token));
                localStorage.setItem('login','true')
               this.notification.showSuccess('login success..!')
-              this.routeVal.navigate(['dashboard']);
+              this.routeVal.navigate(['dashboard/products']);
             
            
         }
