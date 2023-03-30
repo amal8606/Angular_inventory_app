@@ -1,6 +1,6 @@
 <div class="bg-black/80 p-[10rem]">
   <div
-    class="bg-gray-800 border rounded-xl shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] max-w-[50rem] mx-auto "
+    class="bg-gray-800 border rounded-xl shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] max-w-[55rem] mx-auto "
   >
     <div class="m-3 text-white">
       <p class="">client Detalis</p>
@@ -50,11 +50,11 @@
         <h3 class="text-lg font-bold text-white">Purchase Details</h3>
         <hr class="text-green-500" />
         <p class="mt-1 text-white">
-          Total Products in Cart: {{ sales?.items.length }}
+          Total Products in Cart:  {{ sales?.items.length }}
         </p>
-        <p class="text-white">total amount: {{sales?.total|currency:('USD')}}</p>
+        <p class="text-white">total amount:  {{sales?.total|currency:('USD')}}</p>
 
-        <p class="mt-1 text-white">createdAt : {{ sales?.created_at|date }}</p>
+        <p class="mt-1 text-white">Date of Purchase :  {{ sales?.created_at|date }}</p>
         <button
           (click)="showCart = true"
           class="m-4 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-slate-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
@@ -63,30 +63,34 @@
           <i class="m-3 fa-solid fa-cart-shopping fa-fade fa-2xl" style="color: brown;"></i>
         </button>
 
-        <div *ngIf="showCart" class="overflow-auto">
-          <table class="min-w-full divide-y divide-gray-200 mt-5">
-            <thead class="bg-white">
-              <th class="px-3 py-4 whitespace-nowrap">Product Name</th>
-              <th class="px-3 py-4 whitespace-nowrap">price</th>
-              <th class="px-3 py-4 whitespace-nowrap"><i 
+        <div *ngIf="showCart" >
+          <i 
                 (click)="showCart=false"
-                class="fa-regular fa-rectangle-xmark fa-lg"></i></th>
-            </thead>
-            <tbody *ngFor="let product of products" class="text-white">
-              <tr>
-                <td class="px-3 py-4 whitespace-nowrap">{{ product.name }}</td>
-                <td class="px-3 py-4 whitespace-nowrap">{{ product.price | currency : "USD" }}</td>
-                <td class="px-3 py-4 whitespace-nowrap"> <i class="fa-sharp fa-solid fa-trash" style="color: rgb(212, 199, 199);"></i></td>
-              </tr>
-            </tbody>
-          </table>
+                class="fa-regular fa-rectangle-xmark fa-2xl" style="color:azure"></i>
+                <div class="max-h-[20rem] overflow-y-auto w-[30rem]">
+                  <table class="min-w-full divide-y divide-gray-200 mt-5">
+                    <thead class="bg-white">
+                      <th class="px-3 py-4 whitespace-nowrap">Product Name</th>
+                      <th class="px-3 py-4 whitespace-nowrap">price</th>
+                      <th class="px-3 py-4 whitespace-nowrap"></th>
+                    </thead>
+                    <tbody *ngFor="let product of products" class="text-white">
+                      <tr>
+                        <td class="px-3 py-4 whitespace-nowrap">{{ product.name }}</td>
+                        <td class="px-3 py-4 whitespace-nowrap">{{ product.price | currency : "USD" }}</td>
+                        <td class="px-3 py-4 whitespace-nowrap"> <i class="fa-sharp fa-solid fa-trash" style="color: rgb(212, 199, 199);"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+       
         </div>
       </div>
     </div>
-    <div class="m-3  ">
+    <div class="mr-5 mt-5">
       <a
-      class="hover:text-lg hover:-translate-y-1 duration-300"
-       routerLink="/dashboard/sales"><i class="fa-solid fa-arrow-left fa-md" style="color:white"> Back</i></a>
+      class="hover:text-lg hover:-translate-y-1 duration-300 bg-black p-3 rounded-xl"
+       routerLink="/dashboard/sales"><i class="fa-solid fa-arrow-left fa-md" style="color:white"> Back</i> </a>
     </div>
   </div>
 </div>

@@ -34,13 +34,13 @@ export class CreateSalesComponent implements OnInit {
     client_id: new FormControl(null, Validators.required),
     products: new FormArray([], Validators.required),
   });
-  get saleProducts(): FormArray {
+  get saleProducts(): FormArray {   
     return this.saleForm.controls['products'] as FormArray;
   }
-  public addProductTolist(productid:number) {
+  public addProductTolist(productid:number,productStock:number) {
     const newProduct: FormGroup = new FormGroup({
       id: new FormControl(productid, Validators.required),
-      quantity: new FormControl(null, Validators.required),
+      quantity: new FormControl(null, [Validators.required,Validators.min(0),Validators.max(productStock)]),
     });
 
     this.saleProducts.push(newProduct);

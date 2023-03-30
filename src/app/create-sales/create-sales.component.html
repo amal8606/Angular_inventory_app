@@ -13,7 +13,7 @@
     class="w-full h-full fixed top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
   >
     <div
-      class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[80rem] lg:w-full m-3 lg:mx-auto bottom-4"
+      class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[80rem] m-3 lg:mx-auto bottom-4"
     >
       <div class="flex flex-col bg-white border shadow-sm rounded-xl">
         <div
@@ -56,7 +56,7 @@
                   type="text"
                   id="hs-leading-icon"
                   name="hs-leading-icon"
-                  class="py-3 px-4 pl-11 block w-full border-gray-500 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                  class="py-3 px-4 pl-11 block w-full border-red-500 shadow-md rounded-md text-sm focus:z-30 focus:border-blue-500 focus:ring-red-800"
                   placeholder="Enter client name"
                 />
                 <div
@@ -80,7 +80,7 @@
               </div>
             </div>
             <div [hidden]="viewProducts">
-              <p class="text-red-400">Select one client to do Purchase</p>
+              <p class="text-red-400"><i class="fa-solid fa-triangle-exclamation" style="color: rgb(21, 4, 68);"></i>  Select one client to make a purchase</p>
             </div>
             <div class=" m-3" *ngIf="viewProducts">
               <label
@@ -127,7 +127,7 @@
                     <td class="px-3 py-2 whitespace-nowrap">
                       <button
                         [hidden]="product.stock == 0"
-                        (click)="addProductTolist(product.id)"
+                        (click)="addProductTolist(product.id,product.stock)"
                         class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
                       >
                       <i class="fa-sharp fa-solid fa-plus"></i>
@@ -141,7 +141,7 @@
              
             </div>
           </div>
-          <div class="max-w-[40rem] mx-auto bg-gray-100 w-[50rem] top-0 pt-3">
+          <div class="max-w-[40rem] mx-auto bg-slate-200 w-[50rem] top-0 pt-3 rounded-md">
             <div class="max-w-[200px] mx-auto top-3">
               <h2>cart <i class="fa-sharp fa-solid fa-cart-shopping" style="color: rgb(211, 20, 20);"></i></h2>
               
@@ -170,10 +170,12 @@
               <div class="ms-2">
                 <label for="products">Quantity</label>
                 <input
+                
                   formControlName="quantity"
                   type="number"
                   class="py-3 px-2 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
-                />
+                
+                  />
               </div>
               <button
                 (click)="removeProduct(i)"
@@ -181,6 +183,9 @@
               >
               <i class="fa-sharp fa-solid fa-trash"></i>
               </button>
+            </div>
+            <div *ngIf="saleProducts.at(i).get('quantity')?.errors?.['max']" class="text-red-500 m-2">
+              <p ><i class="fa-solid fa-triangle-exclamation" style="color: rgb(21, 4, 68);"></i>  Stock limit exceed...</p>
             </div>
           </ng-container>
         </ng-container>
