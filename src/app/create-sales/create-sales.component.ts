@@ -17,7 +17,7 @@ export class CreateSalesComponent implements OnInit {
     private readonly functionServ: GetFunctionService,
     private readonly dataServ: GenerateDataService
   ) {}
-  viewProducts=false
+  viewProducts = false;
   addSale = false;
   info = false;
   showDiv = false;
@@ -34,17 +34,20 @@ export class CreateSalesComponent implements OnInit {
     client_id: new FormControl(null, Validators.required),
     products: new FormArray([], Validators.required),
   });
-  get saleProducts(): FormArray {   
+  get saleProducts(): FormArray {
     return this.saleForm.controls['products'] as FormArray;
   }
-  public addProductTolist(productid:number,productStock:number) {
+  public addProductTolist(productid: number, productStock: number) {
     const newProduct: FormGroup = new FormGroup({
       id: new FormControl(productid, Validators.required),
-      quantity: new FormControl(null, [Validators.required,Validators.min(0),Validators.max(productStock)]),
+      quantity: new FormControl(null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(productStock),
+      ]),
     });
 
     this.saleProducts.push(newProduct);
-    
   }
 
   public removeProduct(productIndex: any) {
@@ -71,10 +74,9 @@ export class CreateSalesComponent implements OnInit {
 
   selectClient(clientId: any, value: string) {
     this.showDiv = false;
-    console.log(clientId);
     this.saleForm.get('client_id')?.setValue(clientId);
     this.searchValue = value;
-    this.viewProducts=true
+    this.viewProducts = true;
   }
   sendNewSales() {
     this.http.post(`${this.url}/sales`, this.saleForm.value).subscribe({
@@ -92,7 +94,6 @@ export class CreateSalesComponent implements OnInit {
         this.toastr.showError(error);
       },
     });
-    console.log(this.saleForm.value);
   }
   setProductId() {}
   closeSales() {
@@ -102,7 +103,7 @@ export class CreateSalesComponent implements OnInit {
     this.saleForm.reset();
     this.saleProducts.clear();
     this.Showtable = false;
-    this.viewProducts=false
+    this.viewProducts = false;
   }
   showtable() {
     this.Showtable = true;
@@ -119,7 +120,7 @@ export class CreateSalesComponent implements OnInit {
         })
       ));
   }
-  clearCart(){
-    this.saleProducts.clear()
+  clearCart() {
+    this.saleProducts.clear();
   }
 }

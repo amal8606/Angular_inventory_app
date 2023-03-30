@@ -22,25 +22,19 @@ export class ViewsalesComponent implements OnInit {
         .getSingleProduct(params['sale_id'], 'sales')
         .subscribe((res) => {
           this.sales = res;
-          console.log(this.sales)
           this.createdDate=new Date(this.sales.items[0].created_at)
           console.log(this.createdDate)
           this.getProducts()
         });
     });
-
-    
-   
-    
+  
   }
  
     getProducts(){
       this.sales?.items.forEach((element:any) => {
-        console.log(element)
         this.apiservice.getSingleProduct(element.product_id,'products'
           ).subscribe(response=>{
     this.products.push(response)
-    console.log(this.products)
           })
           
         });

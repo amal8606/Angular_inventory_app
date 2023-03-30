@@ -78,17 +78,20 @@ export class ClientsComponent implements OnInit {
     id: new FormControl(''),
     first_name: new FormControl(''),
     last_name: new FormControl(''),
+    created_at:new FormControl(''),
     address: new FormControl(''),
     city: new FormControl(''),
     state: new FormControl(''),
     country: new FormControl(''),
     phone: new FormControl(''),
     email: new FormControl(''),
+    updated_at: new FormControl(''),
   });
 
   enableEdit(client: any) {
-    this.createClient.setValue(client);
     this.toOpenModal2 = true;
+    this.createClient.setValue(client)
+    console.log(this.createClient)
   }
   editData() {
     const body = this.createClient.value;
