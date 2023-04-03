@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { GenerateDataService } from '../services/generate-data.service';
 import { GetFunctionService } from '../services/get-function.service';
 import { notificationService } from '../services/notification.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-sales',
   templateUrl: './create-sales.component.html',
@@ -15,8 +16,12 @@ export class CreateSalesComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
     private readonly functionServ: GetFunctionService,
-    private readonly dataServ: GenerateDataService
+    private readonly dataServ: GenerateDataService,
+    private readonly router: Router,
+
   ) {}
+  totalamount!:any;
+  showClient=false;
   viewProducts = false;
   addSale = false;
   info = false;
@@ -37,21 +42,52 @@ export class CreateSalesComponent implements OnInit {
   get saleProducts(): FormArray {
     return this.saleForm.controls['products'] as FormArray;
   }
-  public addProductTolist(productid: number, productStock: number) {
-    const newProduct: FormGroup = new FormGroup({
-      id: new FormControl(productid, Validators.required),
-      quantity: new FormControl(null, [
-        Validators.required,
-        Validators.min(0),
-        Validators.max(productStock),
-      ]),
-    });
+  public addProductTolist(product:any) {
+    const productExist=this.saleProducts.controls.some((control)=>
+    control.value.id==product.id)
+    if(!productExist){
+      const newProduct: FormGroup = new FormGroup({
+        price:new FormControl(product.price),
+      name:new FormControl(product.name),
+  stock:new FormControl(product.stock),
+        id: new FormControl(product.id, Validators.required),
+        quantity: new FormControl(1, [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(product.stock),
+        ]),
+      });
+      this.saleProducts.push(newProduct);
+  
+      this.updateTotal()
+    }
+    else{
+      this.toastr.showWarining("Product already added..")
+    }
 
-    this.saleProducts.push(newProduct);
   }
 
   public removeProduct(productIndex: any) {
     this.saleProducts.removeAt(productIndex);
+  }
+  minusQuantity(index:number){
+
+this.saleProducts.controls[index].patchValue({
+  quantity:this.saleProducts.at(index).get('quantity')?.value-1
+})
+this.updateTotal()
+  }
+plusQuantity(index:number){
+
+  this.saleProducts.controls[index].patchValue({
+    quantity:this.saleProducts.at(index).get('quantity')?.value+1
+    
+  })
+  
+  this.updateTotal()
+  }
+  reDirect(){
+this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
   }
   ngOnInit(): void {
     this.clients$ = this.dataServ.getClients();
@@ -87,6 +123,9 @@ export class CreateSalesComponent implements OnInit {
         this.addSale = false;
         this.searchValue = '';
         this.Showtable = false;
+    this.saleForm.reset();
+    this.showClient=false;
+
 
         this.functionServ.sendClickEvent();
       },
@@ -104,6 +143,7 @@ export class CreateSalesComponent implements OnInit {
     this.saleProducts.clear();
     this.Showtable = false;
     this.viewProducts = false;
+    this.showClient=false;
   }
   showtable() {
     this.Showtable = true;
@@ -113,6 +153,7 @@ export class CreateSalesComponent implements OnInit {
           return product.filter(
             (product: any) =>
               product.active == true &&
+              product.stock>0&&
               product.name
                 .toLowerCase()
                 .includes(this.searchProductValue.toLowerCase())
@@ -123,4 +164,14 @@ export class CreateSalesComponent implements OnInit {
   clearCart() {
     this.saleProducts.clear();
   }
-}
+
+  updateTotal(){
+
+    this.totalamount=this.saleProducts.controls.reduce((acc:any,val:any)=>{
+      acc=acc+ val.value.quantity * val.value.price;
+return acc
+    },0)
+
+    }
+  }
+

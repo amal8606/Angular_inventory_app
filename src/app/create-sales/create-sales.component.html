@@ -13,7 +13,7 @@
     class="w-full h-full fixed top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
   >
     <div
-      class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[80rem] m-3 lg:mx-auto bottom-4"
+      class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[85rem] m-3 lg:mx-auto bottom-4 mx-auto"
     >
       <div class="flex flex-col bg-white border shadow-sm rounded-xl">
         <div
@@ -42,7 +42,13 @@
           </button>
         </div>
         <div class="p-4 overflow-y-auto flex">
-          <div class="max-w-[40rem]">
+          <div *ngIf="!showClient" class="max-w-[100px] mx-auto mt-5 mb-2">
+            <button 
+            (click)="showClient=true"
+            class="hover:bg-blue-400 hover:p-5 hover:-translate-y-1 duration-300 bg-blue-100 rounded-full p-4"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
+            <p >click add User</p>
+          </div>
+          <div class="max-w-[40rem]" *ngIf="showClient">
             <div>
               <label
                 for="hs-leading-icon"
@@ -64,22 +70,32 @@
                 ></div>
               </div>
 
-              <div class="max-h-[200px] overflow-y-auto">
-                <div *ngFor="let client of clients$ | async">
-                  <ng-container *ngIf="showDiv">
-                    <div
-                      (click)="
-                        selectClient(
-                          client.id,
-                          client.first_name + ' ' + client.last_name
-                        )
-                      "
-                      class="hover:bg-gray-500 hover:text-red-300 max-w-[20rem]"
-                    >
-                      <p>{{ client.first_name }} {{ client.last_name }}</p>
+              <div >
+                <ng-container *ngIf="showDiv" >
+                  <div class="max-h-[200px] overflow-y-auto">
+                    <div *ngFor="let client of clients$ | async" >
+                      <div
+                        (click)="
+                          selectClient(
+                            client.id,
+                            client.first_name + ' ' + client.last_name
+                          )
+                        "
+                        class="hover:bg-gray-500 hover:text-red-300 max-w-[20rem]"
+                      >
+                        <p>{{ client.first_name }} {{ client.last_name }}</p>
+                      </div>
+                  </div>
+                  </div>
+                
+
+                    <div class="bg-blue-50">
+                      <button
+                     (click)="reDirect()"
+                      ><i class="fa-solid fa-user-plus"></i>create user</button>
                     </div>
-                  </ng-container>
-                </div>
+              </ng-container>
+
               </div>
             </div>
             <div [hidden]="viewProducts">
@@ -147,7 +163,7 @@
                       <td class="px-3 py-2 whitespace-nowrap">
                         <button
                           [hidden]="product.stock == 0"
-                          (click)="addProductTolist(product.id, product.stock)"
+                          (click)="addProductTolist(product)"
                           class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
                         >
                           <i class="fa-sharp fa-solid fa-plus"></i>
@@ -185,8 +201,9 @@
                 Your cart is empty please add products...
               </p>
             </div>
-            <div class="grid">
-              <div class="max-h-[200px] overflow-y-auto m-5">
+            <div class="grid m-2">
+              <div class="max-h-[300px] overflow-y-auto ">
+              <div class=" m-3 bg-white">
                 <form action="" [formGroup]="saleForm">
                   <ng-container formArrayName="products">
                     <ng-container
@@ -195,30 +212,43 @@
                         let i = index
                       "
                     >
-                      <div class="flex justify-center" formGroupName="{{ i }}">
+                      <div class="flex justify-between" formGroupName="{{ i }}">
+                      
+                        <div class="max-w-[6rem]">
+                          <p class="font-bold ">{{product.get('name')?.value}}</p>
+                          <p>Unit Price</p>
+                          <p>{{product.get('price')?.value| currency:('USD')}}</p>
+                        </div>
+                        <div class="ms-3 mt-3">
+                          <div class="flex">
+                            <button 
+                            (click)="minusQuantity(i)"
+                            class="bg-gray-300 rounded-full m-2 p-3"><i class="fa-solid fa-minus"></i></button>
+
+                            <input
+                              formControlName="quantity"
+                              type="number"
+                              class="py-3 px-3 pl-5 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400 max-w-[4rem]"
+                            />
+                            <button
+                            (click)="plusQuantity(i)"
+                            class="bg-gray-300 rounded-full m-2 p-3"><i class="fa-sharp fa-solid fa-plus"></i></button>
+  
+                          </div>
+                        
+                        </div>
                         <div>
-                          <label for="products">product Id</label>
-                          <input
-                            formControlName="id"
-                            type="number"
-                            class="py-3 px-4 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
-                          />
-                        </div>
-                        <div class="ms-2">
-                          <label for="products">Quantity</label>
-                          <input
-                            formControlName="quantity"
-                            type="number"
-                            class="py-3 px-2 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400"
-                          />
-                        </div>
-                        <button
+                          <button
                           (click)="removeProduct(i)"
-                          class="m-3 hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+                          class="top-1 mr-1 ms-5 hover:-translate-y-1 hover:scale-110 duration-300 py-1 px-3 disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm max-h-[2rem]"
                         >
                           <i class="fa-sharp fa-solid fa-trash"></i>
                         </button>
+                        <p>{{(product.get('price')?.value ) * (product.get('quantity')?.value)| currency:('USD')}}</p>
+                        </div>
+                       
                       </div>
+                    
                       <div
                         *ngIf="saleProducts.at(i).get('quantity')?.errors?.['max']"
                         class="text-red-500 m-2"
@@ -234,8 +264,13 @@
                     </ng-container>
                   </ng-container>
                 </form>
+                
+                <div class="bg-slate-200"></div>
               </div>
+              <hr>
+            </div>
               <div class="m-6" *ngIf="saleProducts.length > 0">
+                <p class="font-bold text-green-800">subtotal: {{totalamount|currency:('USD')}} </p>
                 <button
                   [disabled]="!saleForm.valid"
                   (click)="sendNewSales()"
@@ -251,6 +286,7 @@
                 </button>
               </div>
             </div>
+          
           </div>
         </div>
         <div

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { notificationService } from 'src/app/services/notification.service';
 import { GetFunctionService } from '../services/get-function.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-client',
@@ -14,7 +15,9 @@ export class NewClientComponent {
   constructor(
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
-    private readonly functinalServ:GetFunctionService
+    private readonly functinalServ:GetFunctionService,
+    private readonly router:Router,
+    private readonly query:ActivatedRoute
   ) {}
   @Input()
   clients$!:Observable<any>;
@@ -49,6 +52,11 @@ export class NewClientComponent {
           );
   this.functinalServ.sendClickEvent()
         }
+        this.query.queryParams.subscribe(params=>{
+          if(params['source']=='new'){
+            this.router.navigate(['dashboard/sales'])
+          }
+        })
       },
       error:()=>{
         this.toastr.showError("Something went wrong, try again later");

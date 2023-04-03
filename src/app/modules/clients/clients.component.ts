@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { apiService } from 'src/app/http services/api.service';
 import { GetFunctionService } from 'src/app/services/get-function.service';
@@ -16,7 +17,9 @@ export class ClientsComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
     private readonly api: apiService,
-    private readonly functionServ:GetFunctionService
+    private readonly functionServ:GetFunctionService,
+    private readonly route:ActivatedRoute,
+    private readonly navigate:Router
   ) {}
   public clients$!: Observable<any>;
   currentPage: number = 1;
@@ -125,6 +128,11 @@ export class ClientsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getClients();
+this.route.queryParams.subscribe(params=>{
+  if(params['source']=='new'){
+    this.toOpenModal2=true;
+  }
+})
   }
   private getClients() {
     this.clients$ = this.http.get<{
