@@ -226,6 +226,7 @@
                             class="bg-gray-300 rounded-full m-2 p-3"><i class="fa-solid fa-minus"></i></button>
 
                             <input
+                            (input)="updateTotal()"
                               formControlName="quantity"
                               type="number"
                               class="py-3 px-3 pl-5 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:text-gray-400 max-w-[4rem]"
