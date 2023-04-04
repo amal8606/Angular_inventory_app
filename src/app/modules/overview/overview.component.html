@@ -1,0 +1,55 @@
+<div class="flex items-center justify-between mb-8 text-white">
+    <div>
+      <h1 class="font-bold text-2xl ">Overview</h1>
+      <p>All of your shortcuts.</p>
+    </div>
+    <div class="flex items-center">
+      <input
+        type="email"
+        id="input-email-label"
+        class="py-3 px-4 block border-2 w-80 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 bg-slate-800"
+        placeholder="you@site.com"
+      />
+
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-3 gap-4 mb-4">
+    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900"></div>
+    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900"></div>
+    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900"></div>
+  </div>
+  
+  <div class="grid grid-cols-2 gap-4 text-white">
+    <div *ngFor="let sale of quickSaleData$ |async" class="bg-slate-900 p-4 border rounded-lg">
+      <div class="flex items-center justify-between mb-4">
+        <p class="font-medium">{{sale.name}}</p>
+        <a
+          routerLink="/register"
+          class="text-blue-700 hover:underline dark:text-blue-500"
+          >View all</a
+        >
+      </div>
+      <p>created At: {{sale.created_at|date}}</p>
+      <button 
+      (click)="addTosales(sale.id)"
+      class="bg-blue-400 text-white p-3 rounded-md hover:bg-yellow-500 hover:p-5 hover:-translate-y-1 duration-300">add Sale 
+        <i class="fa-solid fa-arrow-right "></i>
+      </button>
+    </div>
+    <!-- <div class="bg-slate-900 p-4 border rounded-lg">
+      <div class="flex items-center justify-between mb-4">
+        <p class="font-medium">Quick Sales</p>
+        <a
+          routerLink="/register"
+          class="text-blue-700 hover:underline dark:text-blue-500"
+          >View all</a
+        >
+      </div>
+      <p>Lorem, ipsum dolor.</p>
+  
+      <button  class="bg-blue-700 p-4 text-white">
+        Facebook Campaign
+      </button>
+    </div> -->
+  </div>

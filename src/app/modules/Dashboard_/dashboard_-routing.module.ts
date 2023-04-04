@@ -5,8 +5,10 @@ import { Dashboard_Component } from './dashboard_.component';
 
 const routes: Routes = [{ path: '', component: Dashboard_Component ,canActivate:[dashBoardGuard],
 children:[{ path: 'products', loadChildren: () => import('../../modules/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
+{ path: '', loadChildren: () => import('../../modules/overview/overview.module').then(m => m.OverviewModule) },
 { path: 'clients', loadChildren: () => import('../../modules/clients/clients.module').then(m => m.ClientsModule)},
 {path:'sales',loadChildren:()=>import('../sales/sales.module').then(m=>m.SalesModule)}
+
 ]
 }];
 

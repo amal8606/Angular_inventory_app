@@ -1,44 +1,73 @@
-<div style=" background-color: white;color:black;" class="p-2 mt-[13rem] lg:mt-[8rem] md:mt-[10rem] sm:mt-[10rem]"> 
+<div class="flex mt-[13rem] lg:mt-[7rem] md:mt-[16rem] sm:mt-[5rem] overflow-y-hidden"> 
   
-  <a
-  routerLink="products"
-  routerLinkActive="activeUrl"
- 
+  <div class="bg-slate-800  flex items-center flex-col h-screen w-[20rem]">
 
-    class="py-6 px-4 inline-flex justify-center items-center gap-2 rounded-md  border-gray-900 font-semibold text-sm
-      "
-  >
-  <i class="fa-solid fa-store fa-lg"></i>
-    Products
-</a>
-  <a
-  routerLink="clients"
-  routerLinkActive="activeUrl"
- 
+   <nav class="w-full">
 
-    class="py-6 px-4 inline-flex justify-center
-     items-center gap-2 font-semibold
-      text-sm
-      "
-  >
-  <i class="fa-solid fa-user fa-lg"></i>
-    clients
-</a>
-<a
-routerLink="sales"
-routerLinkActive="activeUrl"
-
-
-  class="py-6 px-4 inline-flex justify-center
-   items-center gap-2 font-semibold
-    text-sm
-    "
->
-<i class="fa-solid fa-cart-shopping fa-lg"></i>
-  Sales
-</a>
+    <ul>
+      <h2 class="text-white m-2">Menu</h2>
+      <li class="mb-4 mt-4"><a
+        routerLink="/dashboard"
+        routerLinkActive="activeUrl"
+       [routerLinkActiveOptions]="{exact:true}"
+      
+        class="flex items-center pl-8 h-10 border-l-4 border-r-0 border-y-0 border-transparent hover:border-blue-700 hover:text-blue-700 w-full text-white"
+        >
+        <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-6 h-6 mr-4"
+            >
+              <path
+                d="M11.644 1.59a.75.75 0 01.712 0l9.75 5.25a.75.75 0 010 1.32l-9.75 5.25a.75.75 0 01-.712 0l-9.75-5.25a.75.75 0 010-1.32l9.75-5.25z"
+              />
+              <path
+                d="M3.265 10.602l7.668 4.129a2.25 2.25 0 002.134 0l7.668-4.13 1.37.739a.75.75 0 010 1.32l-9.75 5.25a.75.75 0 01-.71 0l-9.75-5.25a.75.75 0 010-1.32l1.37-.738z"
+              />
+              <path
+                d="M10.933 19.231l-7.668-4.13-1.37.739a.75.75 0 000 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 000-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 01-2.134-.001z"
+              />
+            </svg>
+          overview
+      </a></li>
+      <li class="mb-4"><a
+        routerLink="products"
+        routerLinkActive="activeUrl"
+       
+      
+        class="flex items-center pl-8 h-10 border-l-4 border-r-0 border-y-0 border-transparent hover:border-blue-700 hover:text-blue-700 w-full text-white"
+        >
+        <i class="fa-solid fa-store fa-lg mr-3"></i>
+          Products
+      </a></li>
+      <li class="mb-4"><a
+        routerLink="clients"
+        routerLinkActive="activeUrl"
+       
+      
+        class="flex items-center pl-8 h-10 border-l-4 border-r-0 border-y-0 border-transparent hover:border-blue-700 hover:text-blue-700 w-full text-white"
+        >
+        <i class="fa-solid fa-user mr-3"></i>
+          clients
+      </a></li>
+      <li class="mb-4"><a
+        routerLink="sales"
+        routerLinkActive="activeUrl"
+       
+      
+        class="flex items-center pl-8 h-10 border-l-4 border-r-0 border-y-0 border-transparent hover:border-blue-700 hover:text-blue-700 w-full text-white"
+        >
+        <i class="fa-solid fa-cart-shopping mr-3"></i>
+          sales
+      </a></li>
+    </ul>
+   </nav> 
   </div>
-  <div style="overflow: hidden;">
-    <router-outlet></router-outlet>
+  <div >
+    <main class="h-screen overflow-y-hidden lg:w-[80rem] md:w-[50rem] bg-black/80 p-2 w-100rem s:w-[30rem]">
+      <router-outlet></router-outlet>
 
+    </main>
+  </div>
   </div>

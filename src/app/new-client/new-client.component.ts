@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { notificationService } from 'src/app/services/notification.service';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './new-client.component.html',
   styleUrls: ['./new-client.component.scss']
 })
-export class NewClientComponent {
+export class NewClientComponent implements OnDestroy{
   constructor(
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
@@ -40,6 +40,9 @@ export class NewClientComponent {
     this.toOpenModel = true;
     
   }
+  closeModal(){
+    this.toOpenModel = false;
+  }
   createNewClient() {
     const body = this.createClient.value;
     console.log(body);
@@ -66,5 +69,13 @@ export class NewClientComponent {
         this.toOpenModel=false;
       }
     });
+  }
+  ngOnDestroy(): void {
+    console.log('finished')
+    this.query.queryParams.subscribe(params=>{
+      if(params['source']=='new'){
+        this.router.navigate(['dashboard/sales'],{queryParams:{source:'client_created'}})
+      }
+    })
   }
 }

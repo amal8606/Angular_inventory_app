@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { apiService } from 'src/app/http services/api.service';
-import { map } from 'rxjs';
 import { GetFunctionService } from 'src/app/services/get-function.service';
 
 @Component({
@@ -13,7 +13,8 @@ import { GetFunctionService } from 'src/app/services/get-function.service';
 export class SalesComponent {
   constructor(public apiService:apiService,
     public readonly http:HttpClient,
-    public readonly functionServ:GetFunctionService){
+    public readonly functionServ:GetFunctionService,
+    private readonly router:Router){
 
   }
   public clients$!:Observable<any>;
@@ -24,6 +25,7 @@ export class SalesComponent {
   pageSize: number = 4;
   totalData!: number;
   filteredClients=[]
+  showQuickSale=false
 url="https://api-sales-app.josetovar.dev"
 get total(): number {
   return Math.ceil(this.totalData / this.pageSize);
@@ -113,15 +115,8 @@ ngOnInit(): void {
     });
   }
   
-  // getClientId(){
-  //   console.log(this.searchValue)
-  //   this.filteredClients=this.clients$.pipe(
-  //     map((clients: any) => {
-  //    clients.filter((client:any)=>client.first_name.toLowerCase().includes(this.searchValue.toLocaleLowerCase()))
-  //       console.log(clients)
-  //     })
-  //   );
-
-  // }
+  navigate(){
+    this.router.navigate(['quick-sales'])
+  }
 
 }

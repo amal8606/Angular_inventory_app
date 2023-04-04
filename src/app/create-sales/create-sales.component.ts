@@ -1,23 +1,26 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { GenerateDataService } from '../services/generate-data.service';
 import { GetFunctionService } from '../services/get-function.service';
 import { notificationService } from '../services/notification.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { apiService } from '../http services/api.service';
 @Component({
   selector: 'app-create-sales',
   templateUrl: './create-sales.component.html',
   styleUrls: ['./create-sales.component.scss'],
 })
-export class CreateSalesComponent implements OnInit {
+export class CreateSalesComponent implements OnInit , OnDestroy{
   constructor(
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
     private readonly functionServ: GetFunctionService,
     private readonly dataServ: GenerateDataService,
     private readonly router: Router,
+    private readonly activeRoute:ActivatedRoute,
+    private readonly api:apiService
 
   ) {}
   totalamount!:any;
@@ -90,6 +93,21 @@ plusQuantity(index:number){
 this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
   }
   ngOnInit(): void {
+    this.activeRoute.queryParams.subscribe(params=>{
+      if(params['quicksale']){
+        this.addSale=true;
+        this.showClient=true;
+        this.api.getApi(`quick-sales/${params['quicksale']}`).subscribe(res=>{
+          this.updateTotal()
+          // this.addProductTolist(res.products[0])
+          res.products.forEach((item:any)=>{
+          this.addProductTolist(item)
+           
+
+          })
+        })
+      }
+    })
     this.clients$ = this.dataServ.getClients();
     this.clients$.subscribe();
     this.products$ = this.dataServ.getProducts();
@@ -115,6 +133,7 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
     this.viewProducts = true;
   }
   sendNewSales() {
+    console.log(this.saleForm.value)
     this.http.post(`${this.url}/sales`, this.saleForm.value).subscribe({
       next: (response) => {
         this.toastr.showSuccess('New sale added successFully');
@@ -172,6 +191,9 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
 return acc
     },0)
 
+    }
+    ngOnDestroy(): void {
+      this.saleProducts.clear();
     }
   }
 

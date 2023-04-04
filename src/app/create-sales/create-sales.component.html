@@ -177,7 +177,7 @@
             </div>
           </div>
           <div
-            class="max-w-[40rem] mx-auto bg-slate-200 w-[50rem] top-0 pt-3 rounded-md"
+            class="max-w-[40rem] mx-auto  w-[55rem] top-0 pt-3 rounded-md"
           >
             <div class="max-w-[200px] mx-auto top-3">
               <h2>
@@ -202,8 +202,8 @@
               </p>
             </div>
             <div class="grid m-2">
-              <div class="max-h-[300px] overflow-y-auto ">
-              <div class=" m-3 bg-white">
+              <ul class="max-h-[300px] overflow-y-auto ">
+              <div >
                 <form action="" [formGroup]="saleForm">
                   <ng-container formArrayName="products">
                     <ng-container
@@ -212,6 +212,7 @@
                         let i = index
                       "
                     >
+                    <li class=" m-1 bg-blue-100 p-3">
                       <div class="flex justify-between" formGroupName="{{ i }}">
                       
                         <div class="max-w-[6rem]">
@@ -262,6 +263,7 @@
                           Stock limit exceed...
                         </p>
                       </div>
+                    </li>
                     </ng-container>
                   </ng-container>
                 </form>
@@ -269,7 +271,7 @@
                 <div class="bg-slate-200"></div>
               </div>
               <hr>
-            </div>
+            </ul>
               <div class="m-6" *ngIf="saleProducts.length > 0">
                 <p class="font-bold text-green-800">subtotal: {{totalamount|currency:('USD')}} </p>
                 <button
