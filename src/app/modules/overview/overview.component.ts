@@ -44,4 +44,7 @@ getData(){
 addTosales(saleId:number){
   this.navigateUrl.navigate(['dashboard/sales'],{queryParams:{quicksale:saleId}})
 }
+navigate(){
+  this.navigateUrl.navigate(['dashboard/sales/quicksales'])
+}
 }

@@ -25,7 +25,7 @@ export class ClientsComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 4;
   totalData!: number;
-
+openModel=false;
   toOpenModal2 = false;
   public url = 'https://api-sales-app.josetovar.dev/clients';
   get total(): number {
@@ -128,11 +128,6 @@ export class ClientsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getClients();
-this.route.queryParams.subscribe(params=>{
-  if(params['source']=='new'){
-    this.toOpenModal2=true;
-  }
-})
   }
   private getClients() {
     this.clients$ = this.http.get<{

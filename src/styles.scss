@@ -13,7 +13,7 @@ body{
 }
 @layer components{
     .login{
-        @apply hover:-translate-y-1 hover:scale-110 duration-300 font-medium text-gray-400 hover:text-blue-500 hover:text-[20px];
+        @apply hover:-translate-y-1 hover:scale-110 duration-300 font-medium text-gray-400 hover:text-blue-500 hover:text-[20px] p-4;
     };
     .pagination{
         @apply bg-red-500 text-white

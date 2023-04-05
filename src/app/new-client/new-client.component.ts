@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { notificationService } from 'src/app/services/notification.service';
@@ -11,13 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './new-client.component.html',
   styleUrls: ['./new-client.component.scss']
 })
-export class NewClientComponent implements OnDestroy{
+export class NewClientComponent implements OnDestroy, OnInit{
   constructor(
     private readonly http: HttpClient,
     private readonly toastr: notificationService,
     private readonly functinalServ:GetFunctionService,
     private readonly router:Router,
-    private readonly query:ActivatedRoute
+    private readonly active:ActivatedRoute
   ) {}
   @Input()
   clients$!:Observable<any>;
@@ -55,7 +55,7 @@ export class NewClientComponent implements OnDestroy{
           );
   this.functinalServ.sendClickEvent()
         }
-        this.query.queryParams.subscribe(params=>{
+        this.active.queryParams.subscribe(params=>{
           if(params['source']=='new'){
             this.router.navigate(['dashboard/sales'])
           }
@@ -70,9 +70,18 @@ export class NewClientComponent implements OnDestroy{
       }
     });
   }
+  ngOnInit(): void {
+    console.log('hii')
+    this.active.queryParams.subscribe(param=>{
+      console.log(param['source'])
+      if(param['source']=='new'){
+   this.toOpenModel=true
+      }
+    })
+  }
   ngOnDestroy(): void {
     console.log('finished')
-    this.query.queryParams.subscribe(params=>{
+    this.active.queryParams.subscribe(params=>{
       if(params['source']=='new'){
         this.router.navigate(['dashboard/sales'],{queryParams:{source:'client_created'}})
       }

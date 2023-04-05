@@ -29,6 +29,8 @@ updateSingleProduct(product:any):Observable<any>{
 addProduct(product:any):Observable<any>{
     return this.http.post(`${this.url}/products`,product)
 }
-
+public getAuth(): Observable<any> {
+    return this.http.post(`${this.url}/auth`, {});
+  }
 
 }

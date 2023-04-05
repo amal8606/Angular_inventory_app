@@ -1,9 +1,13 @@
-<div class="flex items-center justify-between mb-8 text-white mt-3">
+<div>
+  <div class="flex items-center justify-between mb-8 text-white mt-5 mb-3" >
     <div>
       <h1 class="font-bold text-2xl ">Overview</h1>
       <p>All of your shortcuts.</p>
     </div>
     <div class="flex items-center">
+      <button 
+      (click)="navigate()"
+      class="bg-yellow-500 text-white p-2 m-3 rounded-lg hover:p-4"><i class="fa-solid fa-bolt m-3"></i>Quick Sale</button>
       <input
         type="email"
         id="input-email-label"
@@ -43,7 +47,7 @@
     </div>
   </div>
   
-  <div class="grid grid-cols-2 gap-4 text-white">
+  <div class="grid grid-cols-2 gap-4 text-white mb-3 max-h-[200px]">
     <div *ngFor="let sale of quickSaleData$ |async" class="bg-slate-900 p-4 border rounded-lg">
       <div class="flex items-center justify-between mb-4">
         <p class="font-medium">{{sale.name}}</p>
@@ -56,19 +60,6 @@
         <i class="fa-solid fa-arrow-right "></i>
       </button>
     </div>
-    <!-- <div class="bg-slate-900 p-4 border rounded-lg">
-      <div class="flex items-center justify-between mb-4">
-        <p class="font-medium">Quick Sales</p>
-        <a
-          routerLink="/register"
-          class="text-blue-700 hover:underline dark:text-blue-500"
-          >View all</a
-        >
-      </div>
-      <p>Lorem, ipsum dolor.</p>
-  
-      <button  class="bg-blue-700 p-4 text-white">
-        Facebook Campaign
-      </button>
-    </div> -->
   </div>
+</div>
+

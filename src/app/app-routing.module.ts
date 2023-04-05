@@ -14,8 +14,8 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'',component:HomeComponent},
   
-  { path: 'login', loadChildren: () => import('./modules/login/login/login.module').then(m => m.LoginModule),canActivate:[LoginGuard] },
-  { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard_.module').then(m => m.Dashboard_Module) },
+  { path: 'login', loadChildren: () => import('./modules/login/login/login.module').then(m => m.LoginModule)},
+  { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard_.module').then(m => m.Dashboard_Module),canActivate:[LoginGuard] },
   {path:'register',component:ShowPasComponent},
   { path: 'sales', loadChildren: () => import('./modules/sales/sales.module').then(m => m.SalesModule) },
  

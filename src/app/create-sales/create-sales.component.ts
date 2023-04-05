@@ -94,6 +94,7 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
   }
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe(params=>{
+    
       if(params['quicksale']){
         this.addSale=true;
         this.showClient=true;
