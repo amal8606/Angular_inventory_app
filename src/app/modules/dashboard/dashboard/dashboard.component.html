@@ -130,12 +130,7 @@
         </div>
       </div>
       <hr class="text-white" />
-      <app-pagination
-        [products]="userData$"
-        [currentPage]="currentPage"
-        [pageSize]="pageSize"
-        (paginate)="pageChange($event)"
-      ></app-pagination>
+     
       <form [formGroup]="updateForm">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-white">
@@ -280,5 +275,11 @@
       </form>
     </div>
   </div>
+  <app-pagination
+  [products]="userData$"
+  [currentPage]="currentPage"
+  [pageSize]="pageSize"
+  (paginate)="pageChange($event)"
+></app-pagination>
 </div>
 </div>

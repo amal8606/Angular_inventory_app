@@ -9,41 +9,7 @@
 <app-new-client *ngIf="toOpenModal2" [clients$]="clients$"
 [totalData]="totalData"
 ></app-new-client>
-  <div class="flex justify-end">
-    <nav
-      class="flex items-center space-x-2 m-3 text-md text-white max-w-[500px] p-3 rounded-md font-bold bg-slate-800"
-    >
-      <button
-        (click)="prevBtn()"
-        [hidden]="currentPage == 1"
-        class="hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500"
-      >
-        <span aria-hidden="true">«</span>
-        <span class="sr-only">Previous</span>
-      </button>
-      <ng-container *ngFor="let page of pages">
-        <ng-container *ngIf="page>0 ">
-          <button
-          class="m-2"
-          [ngClass]="{'pagination':page===currentPage}"
-          (click)="gotoPage(page)"
-           class="hover:text-blue-300 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
-        </ng-container>
-      <ng-container *ngIf="page=== -1 ">
-  <span>......</span>
-      </ng-container>
-      </ng-container>
-
-      <button
-        (click)="nxtBtn()"
-        [hidden]="currentPage == total"
-        class="hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500"
-      >
-        <span class="sr-only">Next</span>
-        <span aria-hidden="true">»</span>
-      </button>
-    </nav>
-  </div>
+ 
 
   <div class="flex flex-col bg-black/80 max-h-[500rem]">
     <div class="-m-1.5 overflow-x-auto">
@@ -289,5 +255,40 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="flex justify-end">
+    <nav
+      class="flex items-center space-x-2 m-3 text-md text-white max-w-[500px] p-3 rounded-md font-bold bg-slate-800"
+    >
+      <button
+        (click)="prevBtn()"
+        [hidden]="currentPage == 1"
+        class="hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500"
+      >
+        <span aria-hidden="true">«</span>
+        <span class="sr-only">Previous</span>
+      </button>
+      <ng-container *ngFor="let page of pages">
+        <ng-container *ngIf="page>0 ">
+          <button
+          class="m-2"
+          [ngClass]="{'pagination':page===currentPage}"
+          (click)="gotoPage(page)"
+           class="hover:text-blue-300 p-3 inline-flex items-center text-sm font-medium rounded-full" aria-current="page">{{page}}</button>
+        </ng-container>
+      <ng-container *ngIf="page=== -1 ">
+  <span>......</span>
+      </ng-container>
+      </ng-container>
+
+      <button
+        (click)="nxtBtn()"
+        [hidden]="currentPage == total"
+        class="hover:text-red-300 p-3 inline-flex items-center gap-2 rounded-md bg-blue-500"
+      >
+        <span class="sr-only">Next</span>
+        <span aria-hidden="true">»</span>
+      </button>
+    </nav>
   </div>
 </div>

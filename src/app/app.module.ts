@@ -30,11 +30,6 @@ import { GenerateDataService } from './services/generate-data.service';
     HomeComponent,
     SidebarComponent,
     ViewsalesComponent
-   
-    
-   
-
-  
 
   ],
   

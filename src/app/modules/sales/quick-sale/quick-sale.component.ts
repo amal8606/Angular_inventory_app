@@ -22,6 +22,7 @@ ngOnInit(): void {
 getData(){
   this.api.getApi('quick-sales').subscribe({
     next:(res)=>{
+      console.log(res)
       this.saleData$=of(res)
     }
   })
@@ -31,5 +32,8 @@ addTosale(id:Number){
   this.router.navigate(['dashboard/sales'],{queryParams:{quicksale:id}})
   this.show=false;
 
+}
+viewSale(id:number){
+  this.router.navigate(['/singleproduct'],{queryParams:{saleId:id}})
 }
 }

@@ -1,0 +1,79 @@
+
+<div
+
+  style="position: fixed; top: 3rem; z-index: 1000; left: 50rem; bottom: 10rem"
+>
+  <div
+    class="w-full h-full fixed top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
+  >
+    <div
+      class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[85rem] m-3 lg:mx-auto bottom-4 mx-auto"
+    >
+      <div class="flex flex-col bg-white border shadow-sm rounded-xl">
+        <div
+          class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"
+        >
+          <h3 class="font-bold text-black">Sale Details</h3>
+          <button
+    routerLink=".."
+            type="button"
+            class="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+          >
+            <span class="sr-only">Close</span>
+            <i class="fa-sharp fa-solid fa-eye-slash text-red-500 text-xl"></i>
+          </button>
+        </div>
+        <div class="flex justify-between">
+            <P class="font-bold text-lg m-3">{{saleData?.name}}</P>
+            <p class="font-bold text-lg m-3">Created at: {{saleData?.created_at| date}}</p>
+        </div>
+       <h2 class="text-center">Available Products</h2>
+        <div class="p-2 overflow-y-auto flex">
+           
+            <table class="min-w-full divide-y divide-red-500 mt-5">
+                <thead class="bg-white">
+                  <th class="px-3 py-4 whitespace-nowrap">Product Name</th>
+                  <th class="px-3 py-4 whitespace-nowrap">create At</th>
+                  <th class="px-3 py-4 whitespace-nowrap">Available stock</th>
+                  <th class="px-3 py-4 whitespace-nowrap">Unit price</th>
+
+                </thead>
+                <tbody class="text-black" *ngFor="let product of saleData?.products">
+                  <tr class="hover:bg-green-500">
+                    <td class="px-3 py-4 whitespace-nowrap">
+                      {{ product.name }}
+                    </td>
+                    <td class="px-3 py-4 whitespace-nowrap">
+                      {{ product.created_at | date }}
+                    </td>
+                    <td class="px-3 py-4 whitespace-nowrap">
+                     {{product.stock}}
+                    </td>
+                    <td class="px-3 py-4 whitespace-nowrap">
+                        {{ product.price | currency:'USD' }}
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+        
+
+        </div>
+        <div
+          class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700"
+        >
+          <button
+          routerLink=".."
+
+            type="button"
+            class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm hover:bg-slate-800 hover:text-red-400"
+            data-hs-overlay="#hs-basic-modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

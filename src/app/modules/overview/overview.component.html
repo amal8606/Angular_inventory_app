@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between mb-8 text-white">
+<div class="flex items-center justify-between mb-8 text-white mt-3">
     <div>
       <h1 class="font-bold text-2xl ">Overview</h1>
       <p>All of your shortcuts.</p>
@@ -14,21 +14,40 @@
     </div>
   </div>
   
-  <div class="grid grid-cols-3 gap-4 mb-4">
-    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900"></div>
-    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900"></div>
-    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900"></div>
+  <div class="grid grid-cols-3 gap-4 mb-4 text-white">
+    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900 ">
+      <div class="flex">
+
+        <p class="font-bold m-3 text-[8rem] fa-fade text-red-400">{{totalsales}}</p>
+        <p class="font-bold m-3 text-[2rem] ">Active Sales</p>
+      </div>
+      
+    </div>
+    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900">
+      <div class="flex">
+        <p class="font-bold m-3 text-[8rem] fa-fade text-red-400">{{totalproducts}}</p>
+        <p class="font-bold m-3 text-[2rem] ">Active products </p>
+      </div>
+     
+
+<p></p>
+    </div>
+    <div class="w-full h-[12rem] rounded-2xl border bg-slate-900">
+      <div class="flex">
+        <p class="font-bold m-3 text-[8rem] fa-fade text-red-400">{{totalClients}}</p>
+        <p class="font-bold m-3 text-[2rem] ">Active Users</p>
+  
+      </div>
+    
+
+    </div>
   </div>
   
   <div class="grid grid-cols-2 gap-4 text-white">
     <div *ngFor="let sale of quickSaleData$ |async" class="bg-slate-900 p-4 border rounded-lg">
       <div class="flex items-center justify-between mb-4">
         <p class="font-medium">{{sale.name}}</p>
-        <a
-          routerLink="/register"
-          class="text-blue-700 hover:underline dark:text-blue-500"
-          >View all</a
-        >
+       
       </div>
       <p>created At: {{sale.created_at|date}}</p>
       <button 

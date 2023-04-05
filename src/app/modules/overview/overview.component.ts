@@ -14,14 +14,31 @@ export class OverviewComponent implements OnInit{
     ){
 
   }
+  totalsales!:number;
+  totalproducts!:number;
+  totalClients!:number;
+
 quickSaleData$!:Observable<any>;
 ngOnInit(): void {
   this.getData()
 }
 getData(){
   this.api.getApi('quick-sales').subscribe(res=>{
-    console.log(res)
+   
     this.quickSaleData$=of(res)
+  })
+  this.api.getApi('sales').subscribe(res=>{
+    
+    this.totalsales=res.length
+
+  })
+  this.api.getApi('products').subscribe(res=>{
+    this.totalproducts=res.length
+    
+  })
+  this.api.getApi('clients').subscribe(res=>{
+  this.totalClients=res.length
+   
   })
 }
 addTosales(saleId:number){
