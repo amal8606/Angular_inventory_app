@@ -42,11 +42,11 @@
           </button>
         </div>
         <div class="p-4 overflow-y-auto flex">
-          <div *ngIf="!showClient" class="max-w-[100px] mx-auto mt-5 mb-2">
+          <div *ngIf="!showClient" class="max-w-[150px] mx-auto mt-5 mb-2">
             <button 
             (click)="showClient=true"
-            class="hover:bg-blue-400 hover:p-5 hover:-translate-y-1 duration-300 bg-blue-100 rounded-full p-4"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
-            <p >click add User</p>
+            class="hover:bg-blue-400 hover:p-5 hover:-translate-y-1 duration-300 bg-blue-100 rounded-full p-4 mb-3 m-2"><i class="fa-solid fa-user-plus fa-2xl"></i></button>
+            <p >click to add User</p>
           </div>
 
           <div class="max-w-[40rem]" *ngIf="showClient">
