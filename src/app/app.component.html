@@ -1,5 +1,6 @@
 <div>
   <header
+  *ngIf="showNavbar()"
     class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-red-800 text-sm py-2 top-0"
     [ngClass]="{ 'nav-scroll': !isFixed, 'nav-fixed': isFixed }"
   >

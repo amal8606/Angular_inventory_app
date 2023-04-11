@@ -6,7 +6,7 @@ import { map } from "rxjs";
 })
 export class paginationPipe implements PipeTransform{
 transform(value:Observable<any[]>, currentPage:number, pageSize:number){
-    return value.pipe(
+    return value?.pipe(
         map(items=>{
             const startIndex=(currentPage-1)*pageSize;
             const endindex=startIndex+pageSize

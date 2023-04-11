@@ -1,4 +1,7 @@
+<app-createsale></app-createsale>
+
 <div class="p-4 overflow-y-auto flex w-[70rem]">
+
   <table class="min-w-full divide-y divide-gray-200 mt-5">
       <thead class="bg-white">
         <th class="px-3 py-4 whitespace-nowrap">Sale Name</th>
@@ -7,16 +10,16 @@
         <th class="px-3 py-4 whitespace-nowrap">Actions</th>
 
       </thead>
-      <tbody *ngFor="let product of saleData$ |async" class="text-white">
+      <tbody *ngFor="let product of saleData$ |pagination: currentPage:pageSize |async" class="text-white">
         <tr  class="hover:bg-green-500 ">
           <td class="px-3 py-4 whitespace-nowrap">
-            {{ product.name }}
+            {{ product?.name }}
           </td>
           <td class="px-3 py-4 whitespace-nowrap">
-            {{ product.created_at | date }}
+            {{ product?.created_at | date }}
           </td>
           <td class="px-3 py-4 whitespace-nowrap">
-           {{product.products.length}}
+           {{product?.products.length}}
           </td>
 
            <td class="px-3 py-4 whitespace-nowrap">
@@ -38,3 +41,10 @@
   <router-outlet></router-outlet>
 
 </div>
+
+<app-pagination
+  [products]="saleData$"
+  [currentPage]="currentPage"
+  [pageSize]="pageSize"
+  (paginate)="pageChange($event)"
+></app-pagination>

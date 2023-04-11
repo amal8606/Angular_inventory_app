@@ -32,5 +32,8 @@ addProduct(product:any):Observable<any>{
 public getAuth(): Observable<any> {
     return this.http.post(`${this.url}/auth`, {});
   }
+  public addQuickSale(data:any){
+   return this.http.post(`${this.url}/quick-sales`,data);
+  }
 
 }

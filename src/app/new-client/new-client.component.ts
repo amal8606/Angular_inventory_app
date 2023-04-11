@@ -71,9 +71,7 @@ export class NewClientComponent implements OnDestroy, OnInit{
     });
   }
   ngOnInit(): void {
-    console.log('hii')
     this.active.queryParams.subscribe(param=>{
-      console.log(param['source'])
       if(param['source']=='new'){
    this.toOpenModel=true
       }

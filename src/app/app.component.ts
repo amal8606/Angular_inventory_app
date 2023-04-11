@@ -14,7 +14,8 @@ export class AppComponent{
    
   }
   isFixed=false;
-  ToShowsideBar=false
+  ToShowNavbar=true;
+
   @HostListener('window:scroll',[])
   onWindowScroll(){
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -25,17 +26,11 @@ export class AppComponent{
     }
 
   }
-  @HostListener('document:click',['$event.target'])
-  onClick(target:HTMLElement){
-    const clickedInside=this.myDiv.nativeElement.contains(target);
-    if(clickedInside){
-      this.ToShowsideBar=false
-    }
-  }
   @ViewChild('myDiv') myDiv!:ElementRef<HTMLElement>;
   changeStatus(){
     if(confirm('Do want to log out?')){
       this.route.navigate(['login'])
+  
       localStorage.clear();
     }else{
       console.log("don't want to log out")
@@ -43,6 +38,15 @@ export class AppComponent{
     }
    
     
+  }
+  showNavbar():any{
+    const showNav=localStorage.getItem('login')
+   if(showNav){
+    return false;
+   }
+   else{
+    return true;
+   }
   }
 
 }

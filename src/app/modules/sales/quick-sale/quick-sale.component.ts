@@ -15,6 +15,12 @@ constructor(private readonly api:apiService,
 }
 show=false
 saleData$!:Observable<any>
+currentPage: number = 1;
+pageSize: number = 4;
+pageChange(page:number){
+  this.currentPage=page;
+}
+
 ngOnInit(): void {
 
   this.getData()
@@ -22,7 +28,6 @@ ngOnInit(): void {
 getData(){
   this.api.getApi('quick-sales').subscribe({
     next:(res)=>{
-      console.log(res)
       this.saleData$=of(res)
     }
   })

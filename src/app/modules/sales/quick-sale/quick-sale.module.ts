@@ -3,18 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { QuickSaleComponent } from './quick-sale.component';
 import { quickSaleRoutingModule } from './quick-sale-routing.module';
+import { CreatesaleComponent } from './createsale/createsale.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../shareModule.module';
 
 
 
 @NgModule({
   declarations: [
-QuickSaleComponent
+QuickSaleComponent,
+CreatesaleComponent
 
 
   ],
   imports: [
     CommonModule,
     quickSaleRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule
  
   ]
 })

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PaginationComponent } from 'src/app/pagination/pagination.component';
 import { SharedModule } from '../../shareModule.module';
 
 
@@ -12,8 +11,7 @@ import { SharedModule } from '../../shareModule.module';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
-    PaginationComponent,
+    DashboardComponent
    
   ],
   imports: [

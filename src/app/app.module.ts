@@ -1,22 +1,21 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import{LoginGuard} from './authentication/login,guard';
-import { ShowPasComponent } from './show-pas/show-pas.component';
-import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { apiService } from './http services/api.service';
-import { SimpleProductComponent } from './simple-product/simple-product.component';
-import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { notificationService } from './services/notification.service';
+import { LoginGuard } from './authentication/login,guard';
 import { TokenInterceptor } from './authentication/token.interceptor';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ViewsalesComponent } from './viewsales/viewsales.component';
+import { HomeComponent } from './home/home.component';
+import { apiService } from './http services/api.service';
 import { GenerateDataService } from './services/generate-data.service';
+import { notificationService } from './services/notification.service';
+import { ShowPasComponent } from './show-pas/show-pas.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SimpleProductComponent } from './simple-product/simple-product.component';
+import { ViewsalesComponent } from './viewsales/viewsales.component';
 
 
 // import { tokenInterceptor } from './authentication/token.intercept';

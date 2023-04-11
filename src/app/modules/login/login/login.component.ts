@@ -40,6 +40,7 @@ export class LoginComponent {
                localStorage.setItem('login','true')
               this.notification.showSuccess('login success..!')
               this.routeVal.navigate(['dashboard']);
+    
             
            
         }

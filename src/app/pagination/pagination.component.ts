@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -72,8 +71,7 @@ export class PaginationComponent implements OnChanges {
     }
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.products.subscribe((product) => {
-      console.log(product.length);
+    this.products?.subscribe((product) => {
       this.totalData = product.length;
     });
     if (changes['products']) {
