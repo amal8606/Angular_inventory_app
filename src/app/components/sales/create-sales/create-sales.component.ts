@@ -2,15 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
-import { GenerateDataService } from '../services/generate-data.service';
-import { GetFunctionService } from '../services/get-function.service';
-import { notificationService } from '../services/notification.service';
+import { GenerateDataService } from '../../../services/generate-data.service';
+import { GetFunctionService } from '../../../services/get-function.service';
+import { notificationService } from '../../../services/notification.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { apiService } from '../http services/api.service';
+import { apiService } from '../../../http services/api.service';
 @Component({
   selector: 'app-create-sales',
   templateUrl: './create-sales.component.html',
-  styleUrls: ['./create-sales.component.scss'],
 })
 export class CreateSalesComponent implements OnInit , OnDestroy{
   constructor(

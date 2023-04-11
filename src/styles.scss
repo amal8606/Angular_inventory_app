@@ -24,9 +24,17 @@ body{
     .activeUrl{
         @apply  text-red-900 bg-slate-300/50
     }
-    
+    #sampleImage{
+        @apply relative  w-full top-[150px]
+    }
+    #download{
+        @apply h-[500px] pt-[100px]
+    }
  
 }
-a{
-    text-decoration: none;
+@layer base{
+    a{
+       @apply no-underline;
+    }
 }
+

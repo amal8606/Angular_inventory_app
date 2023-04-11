@@ -9,7 +9,6 @@ import { notificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-createsale',
   templateUrl: './createsale.component.html',
-  styleUrls: ['./createsale.component.scss']
 })
 export class CreatesaleComponent implements OnInit{
 constructor(private readonly toastr:notificationService,

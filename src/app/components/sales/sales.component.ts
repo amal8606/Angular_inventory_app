@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { apiService } from 'src/app/http services/api.service';
 import { GetFunctionService } from 'src/app/services/get-function.service';
 

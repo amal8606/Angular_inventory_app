@@ -17,11 +17,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./modules/login/login/login.module').then(m => m.LoginModule)},
   { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard_.module').then(m => m.Dashboard_Module),canActivate:[LoginGuard] },
   {path:'register',component:ShowPasComponent},
-  { path: 'sales', loadChildren: () => import('./modules/sales/sales.module').then(m => m.SalesModule) },
  
-  { path: 'overview', loadChildren: () => import('./modules/overview/overview.module').then(m => m.OverviewModule) },
- { path: 'all-sales', loadChildren: () => import('./modules/sales/all-sales/all-sales.module').then(m => m.AllSalesModule) },
- { path: 'single-sale', loadChildren: () => import('./modules/sales/single-sale/single-sale.module').then(m => m.SingleSaleModule) }
+
  
 
 ];

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map, Observable, of } from 'rxjs';
-import { apiService } from '../../../http services/api.service';
-import { notificationService } from '../../../services/notification.service';
+import { apiService } from '../../http services/api.service';
+import { notificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard',
