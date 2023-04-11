@@ -9,8 +9,8 @@ import { notificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss'],
+  templateUrl: './clients.component.html'
+
 })
 export class ClientsComponent implements OnInit {
   constructor(

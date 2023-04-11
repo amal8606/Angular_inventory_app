@@ -5,8 +5,8 @@ import { apiService } from 'src/app/http services/api.service';
 
 @Component({
   selector: 'app-single-sale',
-  templateUrl: './single-sale.component.html',
-  styleUrls: ['./single-sale.component.scss']
+  templateUrl: './single-sale.component.html'
+
 })
 export class SingleSaleComponent implements OnInit{
 constructor(private readonly router:Router,

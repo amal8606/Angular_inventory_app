@@ -7,8 +7,8 @@ import { GetFunctionService } from 'src/app/services/get-function.service';
 
 @Component({
   selector: 'app-all-sales',
-  templateUrl: './all-sales.component.html',
-  styleUrls: ['./all-sales.component.scss']
+  templateUrl: './all-sales.component.html'
+ 
 })
 export class AllSalesComponent {
     constructor(public apiService:apiService,

@@ -30,6 +30,12 @@ body{
     #download{
         @apply h-[500px] pt-[100px]
     }
+    .forms{
+       @apply bg-yellow-200 w-[500px] h-[300px] text-center ms-[500px] pt-[100px]
+    }
+    .formItem{
+        @apply m-[10px]
+    }
  
 }
 @layer base{

@@ -5,8 +5,7 @@ import { apiService } from 'src/app/http services/api.service';
 
 @Component({
   selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss']
+  templateUrl: './overview.component.html'
 })
 export class OverviewComponent implements OnInit{
   constructor(private readonly api:apiService,
