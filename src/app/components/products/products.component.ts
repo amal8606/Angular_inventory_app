@@ -8,9 +8,9 @@ import { notificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html'
+  templateUrl: './products.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class ProductsComponent implements OnInit {
   constructor(
     private api: apiService,
     private http: HttpClient,

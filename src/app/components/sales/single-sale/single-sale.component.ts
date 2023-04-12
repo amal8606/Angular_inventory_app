@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable,of } from 'rxjs';
 import { apiService } from 'src/app/http services/api.service';
 
 @Component({

@@ -3,11 +3,11 @@ import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-dashboard',
-    templateUrl: './dashboard_.component.html',
-   styleUrls:['./Dashboard_.component.scss']
+    templateUrl: './dashboard.component.html',
+   styleUrls:['./Dashboard.component.scss']
    
   })
-  export class Dashboard_Component {
+  export class DashboardComponent {
     constructor(private readonly route:Router){
 
     }

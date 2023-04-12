@@ -1,20 +1,20 @@
 <div>
   <header
   *ngIf="showNavbar()"
-    class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-red-800 text-sm py-2 top-0"
+    class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-red-900 text-sm py-2 top-0"
     [ngClass]="{ 'nav-scroll': !isFixed, 'nav-fixed': isFixed }"
   >
     <nav
-      class="max-w-[85rem] w-full px-4 sm:flex sm:items-center sm:justify-between flex justify-between"
+      class=" w-full px-4 sm:flex sm:items-center sm:justify-between flex justify-between"
       aria-label="Global"
     >
       <div class="flex m-2">
         <h1
-          class="flex-none text-xxl ms-0 font-semibold text-white dark:text-gray-800"
+          class="flex-none text-xxl ms-0 font-semibold text-white dark:text-gray-800 "
         >
           <i
             class="fa-solid fa-cart-shopping fa-lg m-2 fa-shake"
-            style="color: #f8430c"
+            
           ></i
           >Inventory
         </h1>
@@ -27,19 +27,19 @@
           class="flex gap-5 mt-2 sm:flex-row sm:items-center sm:justify-end sm:mt-2"
         >
           <a
-            class="hover:-translate-y-1 hover:scale-110 duration-300 font-medium text-gray-400 hover:text-blue-500 hover:text-[20px] p-4"
+            class="login"
             routerLink="home"
             [routerLinkActive]="'active'"
-            >Home</a
+            ><i class="fa-solid fa-house"></i> Home</a
           >
           <a class="login" routerLink="login" [routerLinkActive]="'active'"
-            >Login</a
+            ><i class="fa-sharp fa-solid fa-right-to-bracket"></i> Sign In</a
           >
-          <a class="login" routerLink="dashboard" [routerLinkActive]="'active'"
-            >dashboard</a
+          <a class="login " routerLink="dashboard" [routerLinkActive]="'active'"
+            ><i class="fa-solid fa-bars-progress"></i> dashboard</a
           >
-          <a class="login" routerLink="login" (click)="changeStatus()"
-            >Log Out</a
+          <a class="login" routerLink="register" [routerLinkActive]="'active'"
+            ><i class="fa-solid fa-user-plus"></i> Sign Up</a
           >
         </div>
       </div>

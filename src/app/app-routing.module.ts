@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'',component:HomeComponent},
   
   { path: 'login', loadChildren: () => import('./modules/login/login/login.module').then(m => m.LoginModule)},
-  { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard_.module').then(m => m.Dashboard_Module),canActivate:[LoginGuard] },
+  { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard.module').then(m => m.Dashboard_Module),canActivate:[LoginGuard] },
   {path:'register',component:ShowPasComponent},
  
 

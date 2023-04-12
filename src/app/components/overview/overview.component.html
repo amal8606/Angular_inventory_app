@@ -1,4 +1,4 @@
-<div class="mb-6">
+<div class="">
   <div class="flex items-center justify-between mb-8 text-white mt-5 mb-3" >
     <div>
       <h1 class="font-bold text-2xl ">Overview</h1>
@@ -18,7 +18,7 @@
     </div>
   </div>
   
-  <div class="grid grid-cols-3 gap-4 mb-4 text-white">
+  <div class="grid grid-cols-3 gap-4 mb-4 text-white" >
     <div class="w-full h-[12rem] rounded-2xl border bg-slate-900 ">
       <div class="flex">
 
@@ -46,20 +46,29 @@
 
     </div>
   </div>
-  
-  <div class="grid grid-cols-2 gap-4 text-white mb-3 max-h-[200px]">
-    <div *ngFor="let sale of quickSaleData$ |async" class="bg-slate-900 p-4 border rounded-lg">
-      <div class="flex items-center justify-between mb-4">
-        <p class="font-medium">{{sale.name}}</p>
-       
+  <div class="grid">
+    <div class="grid grid-cols-2 gap-4 text-white mb-3 max-h-[200px]">
+      <div *ngFor="let sale of cardsToshow" class="bg-slate-900 p-4 border rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+          <p class="font-medium">{{sale.name}}</p>
+         
+        </div>
+        <p>created At: {{sale.created_at|date}}</p>
+        <button 
+        (click)="addTosales(sale.id)"
+        class="bg-blue-400 text-white p-3 rounded-md hover:bg-yellow-500 hover:p-5 hover:-translate-y-1 duration-300">add Sale 
+          <i class="fa-solid fa-arrow-right "></i>
+        </button>
       </div>
-      <p>created At: {{sale.created_at|date}}</p>
-      <button 
-      (click)="addTosales(sale.id)"
-      class="bg-blue-400 text-white p-3 rounded-md hover:bg-yellow-500 hover:p-5 hover:-translate-y-1 duration-300">add Sale 
-        <i class="fa-solid fa-arrow-right "></i>
-      </button>
     </div>
+  
   </div>
+  <div class="text-center mt-[14rem]">
+    <button *ngIf="numberOfdata < totalData"
+    title="view more"
+      (click)="viewAll()"
+      class="bg-white/30 text-white p-3 rounded-full hover:bg-yellow-500 hover:p-5 hover:-translate-y-1 duration-300"><i class="fa-solid fa-angles-down fa-bounce"></i></button>
+  </div>
+  
 </div>
 

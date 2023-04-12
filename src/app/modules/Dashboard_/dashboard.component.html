@@ -5,7 +5,16 @@
    <nav class="w-full">
 
     <ul>
-      <h2 class="text-white m-2">Menu</h2>
+      <h1
+      class="flex-none mt-3 mb-5 font-bold text-red-800 "
+    >
+      <i
+        class="fa-solid fa-cart-shopping fa-lg m-2 "
+        
+      ></i
+      >Inventory
+    </h1>
+      <h2 class="text-red-900 m-2 mt-3"><i class="fa-solid fa-bars text-blue-700"></i> Menu</h2>
       <li class="mb-4 mt-4"><a
         routerLink="/dashboard"
         routerLinkActive="activeUrl"
@@ -74,7 +83,7 @@
    </nav> 
   </div>
   <div >
-    <main class="px-10 py-6 w-full bg-black/80 h-screen overflow-y-auto 2xl:w-[100rem]">
+    <main class="px-10 py-6 w-full bg-black/80 h-screen overflow-auto 2xl:w-[100rem]">
       <router-outlet></router-outlet>
     </main>
   </div>

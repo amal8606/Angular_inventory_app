@@ -2,23 +2,23 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Dashboard_RoutingModule } from './dashboard_-routing.module';
-import { Dashboard_Component } from './dashboard_.component';
+import { Dashboard_RoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
 import { ClientsComponent } from 'src/app/components/clients/clients.component';
 import { NewClientComponent } from 'src/app/new-client/new-client.component';
 import { SharedModule } from '../shareModule.module';
-import { DashboardComponent } from 'src/app/components/products/dashboard.component';
-import { SalesComponent } from 'src/app/components/sales/sales.component';
-import { AllSalesComponent } from 'src/app/components/sales/all-sales/all-sales.component';
-import { QuickSaleComponent } from 'src/app/components/sales/quick-sale/quick-sale.component';
-import { SingleSaleComponent } from 'src/app/components/sales/single-sale/single-sale.component';
-import { CreatesaleComponent } from 'src/app/components/sales/quick-sale/createsale/createsale.component';
-import { CreateSalesComponent } from 'src/app/components/sales/create-sales/create-sales.component';
+import { ProductsComponent } from 'src/app/components/products/products.component';
+import { SalesComponent } from '@sales/sales.component';
+import { AllSalesComponent } from '@sales/all-sales/all-sales.component';
+import { QuickSaleComponent } from '@sales/quick-sale/quick-sale.component';
+import { SingleSaleComponent } from '@sales/single-sale/single-sale.component';
+import { CreatesaleComponent } from '@sales/quick-sale/createsale/createsale.component';
+import { CreateSalesComponent } from '@sales/create-sales/create-sales.component';
 import { OverviewComponent } from 'src/app/components/overview/overview.component';
 
 @NgModule({
   declarations: [
-    Dashboard_Component,
+    ProductsComponent,
     ClientsComponent,
     NewClientComponent,
     DashboardComponent,
