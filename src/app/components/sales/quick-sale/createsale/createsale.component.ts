@@ -53,7 +53,7 @@ if(!productExist){
 
 }
 deleteProduct(index:number){
-  this.quickSaleProducts.splice(index);
+  this.quickSaleProducts.splice(index,1);
   this.quicksaleProducts.removeAt(index)
   
 }
