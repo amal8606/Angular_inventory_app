@@ -24,7 +24,7 @@
       "dom"
     ],
     "paths": {
-      "@sales/*" :["src/app/components/sales/*"]
+      "@sales/*" :["src/app/-Modules/Dashboard_/sales/*"],
     }
   },
   "angularCompilerOptions": {

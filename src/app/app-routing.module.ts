@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginGuard } from './authentication/login,guard';
-import { HomeComponent } from './home/home.component';
+import { LoginGuard } from './-Core/authentication/Guards/login,guard';
+import { HomeComponent } from './-Modules/home/home.component';
 
-import { ShowPasComponent } from './show-pas/show-pas.component';
-import { SimpleProductComponent } from './simple-product/simple-product.component';
-import { ViewsalesComponent } from './viewsales/viewsales.component';
+import { ShowPasComponent } from './-Modules/Auth/Register/show-pas.component';
+import { SimpleProductComponent } from 'src/app/-Modules/Dashboard_/products/pages/simple-product/simple-product.component';
+import { ViewsalesComponent } from 'src/app/-Modules/Dashboard_/sales/pages/viewsales/viewsales.component';
 
 const routes: Routes = [
   {path:'password',component:ShowPasComponent},
@@ -14,8 +14,8 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'',component:HomeComponent},
   
-  { path: 'login', loadChildren: () => import('./modules/login/login/login.module').then(m => m.LoginModule)},
-  { path: 'dashboard', loadChildren: () => import('./modules/Dashboard_/dashboard.module').then(m => m.Dashboard_Module),canActivate:[LoginGuard] },
+  { path: 'login', loadChildren: () => import('./-Modules/Auth/login/login.module').then(m => m.LoginModule)},
+  { path: 'dashboard', loadChildren: () => import('./-Modules/Dashboard_/dashboard.module').then(m => m.Dashboard_Module),canActivate:[LoginGuard] },
   {path:'register',component:ShowPasComponent},
  
 

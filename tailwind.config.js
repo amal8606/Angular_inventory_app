@@ -2,9 +2,13 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+      "main":"url('https://c8.alamy.com/comp/2D7NW07/hand-of-businessman-holding-inventory-management-inscription-business-success-concept-2D7NW07.jpg')"
+    },
+  },
     screens: {
-      '2xl': {'min': '1920px'}, // this is to support your 23". Make sure your 15.6" screen is less than the min px value passed here
+      '2xl': {'min': '1920px'}
     },
   },
   plugins: [],
