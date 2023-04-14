@@ -2,9 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { notificationService } from 'src/app/-Core/authentication/services/notification.service'
+import { notificationService } from '@Services/notification.service'
 import { clientApiService } from 'src/app/-Core/Http/Api/clients/clientApi.service';
-import { GetFunctionService } from 'src/app/-Core/authentication/services/get-function.service';
+import { GetFunctionService } from '@Services/get-function.service';
 
 @Component({
   selector: 'app-new-client',
@@ -20,10 +20,10 @@ export class NewClientComponent implements OnDestroy, OnInit{
     private readonly active:ActivatedRoute
   ) {}
   @Input()
-  clients$!:Observable<any>;
+ public clients$!:Observable<any>;
   @Input()
-  totalData!:number;
-  toOpenModel = false;
+  public totalData!:number;
+  public toOpenModel = false;
 
   createClient = new FormGroup({
     first_name: new FormControl('',Validators.required),
@@ -35,14 +35,14 @@ export class NewClientComponent implements OnDestroy, OnInit{
     phone: new FormControl('',Validators.required),
     email: new FormControl('',Validators.required),
   });
-  openModel() {
+  public openModel() {
     this.toOpenModel = true;
     
   }
-  closeModal(){
+  public closeModal(){
     this.toOpenModel = false;
   }
-  createNewClient() {
+  public createNewClient() {
     const body = this.createClient.value;
     this.api.addClient(body).subscribe({
       next:(response) => {

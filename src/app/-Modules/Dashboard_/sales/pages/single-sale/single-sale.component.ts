@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { quickSalesApiService } from 'src/app/-Core/Http/Api/Sales/quickSale.service';
+import { quickSalesApiService } from '@Api/Sales/quickSale.service';
 
 @Component({
   selector: 'app-single-sale',

@@ -12,6 +12,7 @@
     *ngIf="addSale"
     class="w-full h-full fixed top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
   >
+  <form action="" [formGroup]="saleForm">
     <div
       class="opacity-100 duration-500 opacity-0 transition-all lg:max-w-[85rem] m-3 lg:mx-auto bottom-4 mx-auto w-[70rem]"
     >
@@ -58,8 +59,8 @@
               >
               <div class="relative">
                 <input
-                  [(ngModel)]="searchValue"
-                  (input)="searchName()"
+                 formControlName="clientName"
+                 (input)="searchName()"
                   type="text"
                   id="hs-leading-icon"
                   name="hs-leading-icon"
@@ -74,13 +75,10 @@
               <div >
                 <ng-container *ngIf="showDiv" >
                   <div class="max-h-[200px] overflow-y-auto">
-                    <div *ngFor="let client of clients$ | async" >
+                    <div *ngFor="let client of clientList" >
                       <div
                         (click)="
-                          selectClient(
-                            client.id,
-                            client.first_name + ' ' + client.last_name
-                          )
+                          selectClient(client)
                         "
                         class="hover:bg-gray-500 hover:text-red-300 max-w-[20rem]"
                       >
@@ -115,7 +113,7 @@
                 ><i class="fa-sharp fa-solid fa-magnifying-glass"></i> search For products</label
               >
               <input
-                [(ngModel)]="searchProductValue"
+                formControlName="productName"
                 (input)="showtable()"
                 type="text"
                 id="hs-leading-icon"
@@ -141,7 +139,7 @@
                     </th>
                   </thead>
                   <tbody
-                    *ngFor="let product of products$ | async"
+                    *ngFor="let product of productList"
                     class="text-black bg-gray-200"
                   >
                     <tr>
@@ -205,7 +203,7 @@
             <div class="grid m-2">
               <ul class="max-h-[300px] overflow-y-auto ">
               <div >
-                <form action="" [formGroup]="saleForm">
+                
                   <ng-container formArrayName="products">
                     <ng-container
                       *ngFor="
@@ -267,7 +265,7 @@
                     </li>
                     </ng-container>
                   </ng-container>
-                </form>
+              
                 
                 <div class="bg-slate-200"></div>
               </div>
@@ -307,5 +305,7 @@
         </div>
       </div>
     </div>
+  </form>
   </div>
+  
 </div>

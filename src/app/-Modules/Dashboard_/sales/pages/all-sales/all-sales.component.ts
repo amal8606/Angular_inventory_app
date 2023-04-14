@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { salesApiService } from 'src/app/-Core/Http/Api/Sales/salesApi.service';
-import { GetFunctionService } from 'src/app/-Core/authentication/services/get-function.service';
-import { Isales } from 'src/app/-Shared/interfaces/sales.interface';
+import { salesApiService } from '@Api/Sales/salesApi.service';
+import { GetFunctionService } from '@Services/get-function.service';
 
 @Component({
   selector: 'app-all-sales',
@@ -21,13 +20,12 @@ export class AllSalesComponent {
     public clients$!:Observable<any>;
     public products$!:Observable<any>;
     public sales$!:Observable<any>;
-    searchValue!:string;
-    currentPage: number = 1;
-    pageSize: number = 4;
-    totalData!: number;
-    filteredClients=[]
-    showQuickSale=false
-  pageChange(page:number){
+    public currentPage: number = 1;
+    public pageSize: number = 4;
+    public totalData!: number;
+    public filteredClients=[]
+    public showQuickSale=false
+    public pageChange(page:number){
     this.currentPage=page
   }
   ngOnInit(): void {
@@ -38,7 +36,7 @@ export class AllSalesComponent {
       this.getSales()
     })
     private getSales() {
-      this.sales$ = this.http.get<Isales>(`${this.apiService.url}`);
+      this.sales$ = this.apiService.getApi();
       this.sales$.subscribe((client) => {
         this.totalData = client.length;
   

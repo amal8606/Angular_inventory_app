@@ -1,22 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { quickSalesApiService } from '@Api/Sales/quickSale.service';
+import { salesApiService } from '@Api/Sales/salesApi.service';
+import { GenerateDataService } from '@Services/generate-data.service';
+import { GetFunctionService } from '@Services/get-function.service';
+import { notificationService } from '@Services/notification.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { salesApiService } from 'src/app/-Core/Http/Api/Sales/salesApi.service';
-import { GenerateDataService } from 'src/app/-Core/authentication/services/generate-data.service';
-import { GetFunctionService } from 'src/app/-Core/authentication/services/get-function.service';
-import { notificationService } from 'src/app/-Core/authentication/services/notification.service';
-import { quickSalesApiService } from 'src/app/-Core/Http/Api/Sales/quickSale.service';
-import { Iproducts } from 'src/app/-Shared/interfaces/product.interface';
 import { Iclient } from 'src/app/-Shared/interfaces/client.interface';
+import { Iproducts } from 'src/app/-Shared/interfaces/product.interface';
 @Component({
   selector: 'app-create-sales',
   templateUrl: './create-sales.component.html',
 })
 export class CreateSalesComponent implements OnInit , OnDestroy{
   constructor(
-    private readonly http: HttpClient,
     private readonly toastr: notificationService,
     private readonly functionServ: GetFunctionService,
     private readonly dataServ: GenerateDataService,
@@ -32,8 +29,11 @@ export class CreateSalesComponent implements OnInit , OnDestroy{
   addSale = false;
   info = false;
   showDiv = false;
-  clients$!: Observable<any>;
-  products$!: Observable<any>;
+  clients!:any[];
+  products!: any[];
+  clientList!:any[];
+  productList!:any[];
+
   Showtable = false;
   searchProductValue!: string;
 
@@ -42,6 +42,8 @@ export class CreateSalesComponent implements OnInit , OnDestroy{
 
   public saleForm: FormGroup = new FormGroup({
     client_id: new FormControl(null, Validators.required),
+    clientName: new FormControl(''),
+    productName: new FormControl(''),
     products: new FormArray([], Validators.required),
   });
   get saleProducts(): FormArray {
@@ -75,14 +77,14 @@ export class CreateSalesComponent implements OnInit , OnDestroy{
   public removeProduct(productIndex: number) {
     this.saleProducts.removeAt(productIndex);
   }
-  minusQuantity(index:number){
+ public minusQuantity(index:number){
 
 this.saleProducts.controls[index].patchValue({
   quantity:this.saleProducts.at(index).get('quantity')?.value-1
 })
 this.updateTotal()
   }
-plusQuantity(index:number){
+public plusQuantity(index:number){
 
   this.saleProducts.controls[index].patchValue({
     quantity:this.saleProducts.at(index).get('quantity')?.value+1
@@ -91,7 +93,7 @@ plusQuantity(index:number){
   
   this.updateTotal()
   }
-  reDirect(){
+ public reDirect(){
 this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
   }
   ngOnInit(): void {
@@ -102,8 +104,7 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
         this.showClient=true;
         this.qApi.getSinglequickSales(`${params['quicksale']}`).subscribe(res=>{
           this.updateTotal()
-          // this.addProductTolist(res.products[0])
-          res.products.forEach((item:Iproducts)=>{
+          res.products.forEach((item:any)=>{
           this.addProductTolist(item)
            
 
@@ -111,31 +112,35 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
         })
       }
     })
-    this.clients$ = this.dataServ.getClients();
-    this.clients$.subscribe();
-    this.products$ = this.dataServ.getProducts();
-    this.products$.subscribe();
-  }
-  searchName() {
-    this.showDiv = true;
-    this.clients$ = this.clients$.pipe(
-      map((client) => {
-        return client.filter((client: Iclient) =>
-          client.first_name
-            .toLowerCase()
-            .includes(this.searchValue.toLowerCase())
-        );
-      })
-    );
+   this.dataServ.getClients().subscribe(clients=>{
+    this.clients=clients
+   });
+  this.dataServ.getProducts().subscribe(products=>{
+    this.products=products
+  });
+
+  
+
   }
 
-  selectClient(clientId: number, value: string) {
+  public searchName() {
+   const value=this.saleForm.controls['clientName'].value
+   this.showDiv=true
+      this.clientList = this.clients.filter((client: Iclient) =>
+            client.first_name
+              .toLowerCase()
+              .includes(value.toLowerCase())
+          );
+ 
+  }
+
+ public selectClient(client:Iclient) {
     this.showDiv = false;
-    this.saleForm.get('client_id')?.setValue(clientId);
-    this.searchValue = value;
+    this.saleForm.get('client_id')?.setValue(client.id);
+    this.saleForm.get('clientName')?.setValue(`${client.first_name} ${client.last_name}`);
     this.viewProducts = true;
   }
-  sendNewSales() {
+  public sendNewSales() {
     
     this.api.addSales(this.saleForm.value).subscribe({
       next: (response) => {
@@ -156,8 +161,8 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
       },
     });
   }
-  setProductId() {}
-  closeSales() {
+
+ public closeSales() {
     this.addSale = false;
     this.showDiv = false;
     this.searchValue = '';
@@ -167,27 +172,23 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
     this.viewProducts = false;
     this.showClient=false;
   }
-  showtable() {
+ public showtable() {
+const value=this.saleForm.controls['productName'].value
     this.Showtable = true;
-    this,
-      (this.products$ = this.products$.pipe(
-        map((product) => {
-          return product.filter(
+      this.productList = this.products.filter(
             (product: any) =>
               product.active == true &&
               product.stock>0&&
               product.name
                 .toLowerCase()
-                .includes(this.searchProductValue.toLowerCase())
+                .includes(value.toLowerCase())
           );
-        })
-      ));
   }
-  clearCart() {
+  public clearCart() {
     this.saleProducts.clear();
   }
 
-  updateTotal(){
+ public updateTotal(){
 
     this.totalamount=this.saleProducts.controls.reduce((acc:any,val:any)=>{
       acc=acc+ val.value.quantity * val.value.price;

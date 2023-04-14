@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { quickSalesApiService } from 'src/app/-Core/Http/Api/Sales/quickSale.service';
+import { quickSalesApiService } from '@Api/Sales/quickSale.service';
 
 @Component({
   selector: 'app-quick-sale',
@@ -9,8 +9,7 @@ import { quickSalesApiService } from 'src/app/-Core/Http/Api/Sales/quickSale.ser
 })
 export class QuickSaleComponent implements OnInit{
 constructor(private readonly api:quickSalesApiService,
-  private router:Router,
-  private activeRouter:ActivatedRoute){
+  private router:Router){
   
 }
 show=false

@@ -57,18 +57,18 @@
                   />
                 </div>
               </div>
-            </form>
+           
             <div class="grid max-w-[300px] mx-auto">
               <input
                 (input)="searchName()"
-                [(ngModel)]="searchValue"
+                formControlName="productName"
                 type="text"
                 placeholder="enter Product name"
                 class="createClient"
               />
               <ng-container *ngIf="showDiv">
                 <div class="max-h-[200px] overflow-y-auto">
-                  <div *ngFor="let product of products$ | async">
+                  <div *ngFor="let product of productList">
                     <ul>
                       <li 
                       class="hover:bg-gray-200"
@@ -80,6 +80,7 @@
                 </div>
               </ng-container>
             </div>
+          </form>
           </div>
 
           <div *ngIf="quicksaleProducts.length>0" class="ms-[10rem] p-3">

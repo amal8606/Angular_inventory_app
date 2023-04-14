@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +11,6 @@ export class SimpleProductComponent implements OnInit {
   constructor(
     private readonly activeRoute: ActivatedRoute,
     private readonly toastr:ToastrService,
-    private readonly http: HttpClient,
     private service: productApiService
   ) {}
   public product: any;

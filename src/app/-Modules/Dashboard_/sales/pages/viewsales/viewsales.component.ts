@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { salesApiService } from 'src/app/-Core/Http/Api/Sales/salesApi.service';
-import { productApiService } from 'src/app/-Core/Http/Api/Products/productsApi.service';
+import { salesApiService } from '@Api/Sales/salesApi.service';
+import { productApiService } from '@Api/Products/productsApi.service';
 
 @Component({
   selector: 'app-viewsales',

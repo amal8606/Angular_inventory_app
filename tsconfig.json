@@ -25,6 +25,9 @@
     ],
     "paths": {
       "@sales/*" :["src/app/-Modules/Dashboard_/sales/*"],
+      "@Services/*":["src/app/-Core/authentication/services/*"],
+      "@Api/*":["src/app/-Core/Http/Api/*"],
+      "@Dashboard/*":["src/app/-Modules/Dashboard_/*"]
     }
   },
   "angularCompilerOptions": {

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, map, of } from 'rxjs';
-import { productApiService } from 'src/app/-Core/Http/Api/Products/productsApi.service';
-import { notificationService } from '../../../-Core/authentication/services/notification.service';
+import { productApiService } from '@Api/Products/productsApi.service';
+import { notificationService } from '@Services/notification.service';
 import { Iproducts } from 'src/app/-Shared/interfaces/product.interface';
 
 @Component({
@@ -20,17 +20,16 @@ export class ProductsComponent implements OnInit {
   isloading: boolean = false;
   public activeEvent: any;
   public stockEvent: any;
-  disable: boolean = false;
-  buttonView: boolean = true;
-  new_stock!: number;
-  userData$!: Observable<any>;
-  productCopy: any;
-  onEdit = false;
-  searchValue!: string;
-  endpoint = 'products';
-  currentPage = 1;
-  pageSize = 3;
-  totalData!: number;
+  public disable: boolean = false;
+  public buttonView: boolean = true;
+  public new_stock!: number;
+  public userData$!: Observable<any>;
+  public productCopy: any;
+  public onEdit = false;
+  public endpoint = 'products';
+  public currentPage = 1;
+  public pageSize = 3;
+  public totalData!: number;
   public updateForm: FormGroup = new FormGroup({});
 
   public addNewRow: FormGroup = new FormGroup({
@@ -40,12 +39,23 @@ export class ProductsComponent implements OnInit {
     stock: new FormControl(''),
     active: new FormControl(false),
   });
+  public searchPruduct:FormGroup= new FormGroup({
+    value:new FormControl(''),
+  })
   ngOnInit(): void {
     this.getProducts();
+    this.searchPruduct.valueChanges.subscribe(values=>
+      {if(values.value){
+        this.searchProduct(values.value)
+      }else{
+        this.getProducts() 
+      }
+        
+      })
   }
   private getProducts() {
     this.isloading = true;
-    this.userData$ = this.http.get<Iproducts>(this.api.url);
+    this.userData$ = this.api.getApi();
 
     this.userData$.subscribe({
       next: (products) => {
@@ -72,7 +82,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  pageChange(pageNumber: number) {
+  public pageChange(pageNumber: number) {
     this.currentPage = pageNumber;
   }
   /////Filter///////////////////////
@@ -120,18 +130,23 @@ export class ProductsComponent implements OnInit {
       })
     );
   }
-  searchProduct() {
-    this.userData$ = this.userData$.pipe(
-      map((products: any) => {
-        return products.filter((product: Iproducts) =>
-          product.name.toLowerCase().includes(this.searchValue.toLowerCase())
-        );
-      })
-    );
+  public searchProduct(name:string) {
+    if(name){
+      this.userData$ = this.userData$.pipe(
+        map((products: any) => {
+          return products.filter((product: Iproducts) =>
+            product.name.toLowerCase().includes(name.toLowerCase())
+          );
+        })
+      );
+    }else{
+      this.getProducts()
+    }
+    
   }
 
   ////////////////////////////////////////////////////////////
-  UpdateStatus(product: Iproducts, event: any) {
+  public UpdateStatus(product: Iproducts, event: any) {
     const status = event.target.checked;
     this.http
       .put(
@@ -163,14 +178,14 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  setFormatCurrency(product: Iproducts, event: any) {
+  public setFormatCurrency(product: Iproducts, event: any) {
     const price = formatCurrency(
       this.getValueFromCurrency(event.target.value),
       'en_US',
       '$'
     );
   }
-  getValueFromCurrency(value: string): number {
+  public getValueFromCurrency(value: string): number {
     let price: number;
     if (value.includes('$')) {
       price = Number(value.substring(1).replaceAll(',', ''));
@@ -179,7 +194,7 @@ export class ProductsComponent implements OnInit {
     }
     return price;
   }
-  updateValue(product: Iproducts) {
+  public updateValue(product: Iproducts) {
     const { price } = this.updateForm.controls[product.id].value;
     let newValues = {
       ...product,
@@ -201,7 +216,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  deleteRow(id: number) {
+  public deleteRow(id: number) {
     if (confirm('Are you sure, want to delete the field ?..')) {
       this.api.deleteProduct(id).subscribe((response: any) => {
         if (response) {
@@ -213,21 +228,21 @@ export class ProductsComponent implements OnInit {
       });
     }
   }
-  disableUpdateButton(product: Iproducts) {
+  public disableUpdateButton(product: Iproducts) {
     const { price, stock } = this.updateForm.controls[product.id].value;
 
     const formatPrice = price.replaceAll('$', '').replaceAll(',', '');
 
     return product.price == formatPrice && stock == product.stock;
   }
-  disableEditing(product: Iproducts) {
+  public disableEditing(product: Iproducts) {
     const { enableEdit } = this.updateForm.controls[product.id].value;
     return enableEdit;
   }
-  createProduct() {
+  public createProduct() {
     this.onEdit = true;
   }
-  addRow() {
+ public addRow() {
     const { name, price, sku, stock,active} = this.addNewRow.value;
     this.api.addProduct(this.addNewRow.value).subscribe((res) => {
       if (res) {
@@ -238,7 +253,7 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-  cancelChanges() {
+  public cancelChanges() {
     this.onEdit = false;
     this.addNewRow.reset()
   }

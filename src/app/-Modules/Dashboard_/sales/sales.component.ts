@@ -5,8 +5,7 @@ import { GetFunctionService } from 'src/app/-Core/authentication/services/get-fu
 
 @Component({
   selector: 'app-sales',
-  templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.scss'],
+  templateUrl: './sales.component.html'
 })
 export class SalesComponent {
   constructor(
