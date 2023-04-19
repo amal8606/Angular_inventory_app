@@ -24,7 +24,6 @@ export class ViewsalesComponent implements OnInit {
         .subscribe((res) => {
           this.sales = res;
           this.createdDate=new Date(this.sales.items[0].created_at)
-          console.log(this.createdDate)
           this.getProducts()
         });
     });

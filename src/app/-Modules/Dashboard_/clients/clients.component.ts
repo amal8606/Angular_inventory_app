@@ -53,11 +53,11 @@ export class ClientsComponent implements OnInit {
     this.api.updateClient(body).subscribe({
       next: (response) => {
         if (response) {
-          console.log(response);
+        
           this.toastr.showSuccess('updation successfull');
           this.api.getApi().subscribe({
             next: (response: any) => {
-              console.log(response);
+            
               this.clients$ = of(response);
             },
             complete: () => {

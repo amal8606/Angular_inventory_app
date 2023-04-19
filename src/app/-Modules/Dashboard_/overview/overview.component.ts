@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { productApiService } from '@Api/Products/productsApi.service';
 import { quickSalesApiService } from '@Api/Sales/quickSale.service';
 import { salesApiService } from '@Api/Sales/salesApi.service';
 import { clientApiService } from '@Api/clients/clientApi.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-overview',
@@ -23,9 +23,9 @@ export class OverviewComponent implements OnInit{
  public totalsales!:number;
  public totalproducts!:number;
  public totalClients!:number;
- public cardsToshow:any=[]
- public numberOfdata=4;
- public totalData!:number;
+ public totalpages!:number;
+ public currentPage:number=1;
+ public pageSize:number=4;
 
  public quickSaleData$!:Observable<any>;
 ngOnInit(): void {
@@ -36,10 +36,10 @@ public getData(){
    
     this.quickSaleData$=this.apiQsale.getApi()
     this.quickSaleData$.subscribe(data=>{
-      this.totalData=data.length
-      this.cardsToshow=data.slice(0,this.numberOfdata)
+      this.totalpages=Math.ceil(data.length/this.pageSize)
     })
- 
+    
+
   this.apiSale.getApi().subscribe(res=>{
     
     this.totalsales=res.length
@@ -53,11 +53,6 @@ public getData(){
   this.totalClients=res.length
    
   })
-}
-public viewAll(){
-  this.numberOfdata=this.totalData
-  this.quickSaleData$.subscribe(data=>
-    this.cardsToshow=data);
 }
 public addTosales(saleId:number){
   this.navigateUrl.navigate(['dashboard/sales'],{queryParams:{quicksale:saleId}})

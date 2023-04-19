@@ -12,6 +12,7 @@ constructor(private readonly api:authApiService,
       this.api.getAuth().subscribe({
          next:()=>{},
          error:()=>{
+            localStorage.clear()
             this.router.navigateByUrl('/login');
             return false;
          }

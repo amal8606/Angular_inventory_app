@@ -76,7 +76,6 @@ export class NewClientComponent implements OnDestroy, OnInit{
     })
   }
   ngOnDestroy(): void {
-    console.log('finished')
     this.active.queryParams.subscribe(params=>{
       if(params['source']=='new'){
         this.router.navigate(['dashboard/sales'],{queryParams:{source:'client_created'}})

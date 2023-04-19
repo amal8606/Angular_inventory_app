@@ -9,6 +9,7 @@ import { AllSalesComponent } from '@sales/pages/all-sales/all-sales.component';
 import { SingleSaleComponent } from '@sales/pages/single-sale/single-sale.component';
 import { QuickSaleComponent } from '@sales/pages/quickSale/quick-sale.component';
 import { OverviewComponent } from 'src/app/-Modules/Dashboard_/overview/overview.component';
+import { updateSaleComponent } from '@sales/pages/quickSale/updateSale/updateSales.component';
 
 
 const routes: Routes = [{ path: '', component: DashboardComponent ,canActivateChild:[LoginGuard],
@@ -18,7 +19,8 @@ children:[{ path: 'products', component:ProductsComponent},
 
 { path: 'clients',component:ClientsComponent},
 {path:'sales',component:SalesComponent,children:[{ path: 'all-sales', component:AllSalesComponent},
-{ path: 'quicksales', component:QuickSaleComponent,children:[{path:':id',component:SingleSaleComponent}]},
+{ path: 'quicksales', component:QuickSaleComponent,children:[{path:':id',component:SingleSaleComponent},
+{path:'update/:id',component:updateSaleComponent}]},
 {path:'',component:AllSalesComponent}]}
 
 

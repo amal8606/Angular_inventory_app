@@ -1,6 +1,6 @@
 <app-createsale></app-createsale>
 
-<div class="p-4 overflow-hidden flex w-[70rem]">
+<div class="p-4 overflow-y-hidden flex w-[70rem]">
 
   <table class="min-w-full divide-y divide-gray-200 mt-5">
       <thead class="bg-white">
@@ -31,6 +31,16 @@
             title="view details" 
            routerLink="{{product.id}}"
             class="bg-white p-3 rounded-full hover:rounded-md ms-5"><i class="fa-solid fa-eye" style="color: black;"></i></a>
+            <button 
+            routerLink="update/{{product.id}}"
+            class="bg-white p-3 rounded-full hover:rounded-md text-black ms-5"><i class="fa-solid fa-pen-to-square"></i>
+
+            </button>
+            <button 
+            (click)="deleteData(product.id)"
+            class="bg-white p-3 rounded-full hover:rounded-md text-black ms-5"><i class="fa-sharp fa-solid fa-trash"></i>
+
+            </button>
            </td>  
         </tr>
       </tbody>
@@ -41,7 +51,6 @@
   <router-outlet></router-outlet>
 
 </div>
-
 <app-pagination
   [products]="saleData$"
   [currentPage]="currentPage"

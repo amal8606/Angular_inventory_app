@@ -39,7 +39,7 @@ export class CreateSalesComponent implements OnInit , OnDestroy{
 
   searchValue!: string;
   productValue!: string;
-
+  
   public saleForm: FormGroup = new FormGroup({
     client_id: new FormControl(null, Validators.required),
     clientName: new FormControl(''),
@@ -76,6 +76,7 @@ export class CreateSalesComponent implements OnInit , OnDestroy{
 
   public removeProduct(productIndex: number) {
     this.saleProducts.removeAt(productIndex);
+    this.updateTotal()
   }
  public minusQuantity(index:number){
 

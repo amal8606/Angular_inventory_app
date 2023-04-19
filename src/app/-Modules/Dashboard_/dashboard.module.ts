@@ -15,6 +15,7 @@ import { NewClientComponent } from 'src/app/-Modules/Dashboard_/clients/pages/ne
 import { Dashboard_RoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from 'src/app/-Shared/shared.module';
+import { updateSaleComponent } from '@sales/pages/quickSale/updateSale/updateSales.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SharedModule } from 'src/app/-Shared/shared.module';
     CreatesaleComponent,
     SingleSaleComponent,
     CreateSalesComponent,
-    OverviewComponent
+    OverviewComponent,
+    updateSaleComponent
    
     
    

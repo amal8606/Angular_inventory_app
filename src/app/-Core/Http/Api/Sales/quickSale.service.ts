@@ -26,5 +26,10 @@ getSinglequickSales(saleId:any):Observable<any>{
   public addQuickSale(data:any){
    return this.http.post(`${this.url}`,data);
   }
-
+  public updateQsales(data:any){
+    return this.http.put(`${this.url}`,data)
+  }
+  public deleteQsale(id:number){
+    return this.http.delete(`${this.url}/${id}`)
+}
 }
