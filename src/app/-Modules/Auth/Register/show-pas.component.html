@@ -1,5 +1,5 @@
 
-<div class="bg-black/80 cover pt-[15rem] pb-[225px] overflow-hidden top-0" style="height:100%;width: 100%;">
+<div class="loginBg cover pt-[15rem] pb-[225px] overflow-hidden top-0 h-screen">
   <section >
     <form action="" [formGroup]="registerForm" (ngSubmit)="getPassword()">
       <div class=" max-w-[350px] mx-auto shadow-md p-6 bg-white text-black rounded-md border border-transparent">
@@ -14,8 +14,8 @@
             formControlName="first_name"
             type="text"
     
-            class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-            placeholder="you@site.com"
+            class="py-3 px-4 block w-full border-gray-200 border-2 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
+            placeholder="enter first name"
         
           />
           <p
@@ -34,8 +34,8 @@
               formControlName="last_name"
               type="text"
         
-              class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-              placeholder="you@site.com"
+              class="py-3 px-4 block w-full border-grey-200 border-2 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
+              placeholder="enter last name"
   
             />
             <p
@@ -54,7 +54,7 @@
               formControlName="email"
               type="email"
               id="input-label-with-helper-text"
-              class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+              class="py-3 px-4 block w-full border-gray-200 border-2 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
               placeholder="you@site.com"
               aria-describedby="hs-input-helper-text"
             />
@@ -73,7 +73,7 @@
           formControlName="password"
           type="password"
           id="input-label-with-helper-text"
-          class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+          class="py-3 px-4 block w-full border-gray-200 border-2 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
           placeholder="you@site.com"
           aria-describedby="hs-input-helper-text"
         />

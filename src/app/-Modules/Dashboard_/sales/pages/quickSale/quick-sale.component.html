@@ -1,3 +1,4 @@
+<div class="overflow-hidden h-screen">
 <app-createsale></app-createsale>
 
 <div class="p-4 overflow-y-hidden flex w-[70rem]">
@@ -38,7 +39,7 @@
             </button>
             <button 
             (click)="deleteData(product.id)"
-            class="bg-white p-3 rounded-full hover:rounded-md text-black ms-5"><i class="fa-sharp fa-solid fa-trash"></i>
+            class="bg-red-300 p-3 rounded-full hover:rounded-md text-black ms-5"><i class="fa-sharp fa-solid fa-trash"></i>
 
             </button>
            </td>  
@@ -57,3 +58,4 @@
   [pageSize]="pageSize"
   (paginate)="pageChange($event)"
 ></app-pagination>
+</div>

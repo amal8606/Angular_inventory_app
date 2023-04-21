@@ -133,6 +133,8 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
               .includes(value.toLowerCase())
           );
  
+
+
   }
 
  public selectClient(client:Iclient) {
@@ -144,9 +146,8 @@ this.router.navigate(['dashboard/clients'],{queryParams:{source:'new'}})
   public sendNewSales() {
     
     this.api.addSales(this.saleForm.value).subscribe({
-      next: (response) => {
+      next: () => {
         this.toastr.showSuccess('New sale added successFully');
-        console.log(response);
         this.saleForm.reset();
         this.addSale = false;
         this.searchValue = '';
