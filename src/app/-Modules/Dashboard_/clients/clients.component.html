@@ -1,77 +1,87 @@
-<div class="bg-black/80" style="overflow: hidden;">
- 
-<app-new-client [clients$]="clients$"
-[totalData]="totalData"
-></app-new-client>
- <button class="m-3 p-3">
-  <label for="">Import
-    <input type="file">
+<div class="bg-black/80 w-[70rem] 2xl:w-full" style="overflow: hidden">
+  <div class="flex justify-between m-3">
+    <app-new-client
+    [clients$]="clients$"
+    [totalData]="totalData"
+  ></app-new-client>
 
-  </label>
- </button>
-
-  <div class="flex flex-col bg-black/80 max-h-[500rem]">
-    <div class="-m-1.5 overflow-x-auto">
-      <div class="p-1.5 min-w-full inline-block align-middle">
-        <div class="overflow-hidden">
+  <div>
+    <label for="file"></label>
+    <input class="text-red-500" type="file" id="file" (change)="onFileChange($event)" #file/>
+    <button
+    [hidden]="!file.value"
+    (click)="importClient()"
+      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2  px-2 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+    >
+      save
+    </button>
+  </div>
+  <div>
+    <a
+    href="javascript:void(0)"
+    (click)="downloadData()"
+    class="bg-green-500 text-white no-underline p-2 hover:text-red-500"
+     >Download Data <i class="fa-solid fa-download"></i></a>
+  </div>
+  </div>
           <hr class="text-white" />
 
           <form>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class=" divide-y divide-gray-200 w-[50rem] overflow-x-auto">
               <thead class="bg-white">
                 <tr>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     First Name
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     Last Name
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     Address
                   </th>
 
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     City
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     State
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     coutry
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     phone
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                   >
                     email
                   </th>
                   <th
                     scope="col"
-                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+                    class=" px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase"
                   >
                     action
                   </th>
@@ -87,178 +97,192 @@
                   class="hover:bg-gray-700"
                 >
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white hover:text-red-800"
+                    class=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white hover:text-red-800"
                   >
                     {{ user.first_name | uppercase }}
                   </td>
 
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                  <td class=" px-6 py-4 whitespace-nowrap text-sm text-white">
                     {{ user.last_name }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white"
+                    class=" px-6 py-4 whitespace-nowrap text-sm font-medium text-white"
                   >
                     {{ user.address }}
                   </td>
 
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                  <td class=" px-6 py-4 whitespace-nowrap text-sm text-white">
                     {{ user.city }}
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                  <td class=" px-2 py-4 whitespace-nowrap text-sm text-white">
                     {{ user.state }}
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                  <td class=" px-2 py-4 whitespace-nowrap text-sm text-white">
                     {{ user.country }}
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                  <td class=" px-2 py-4 whitespace-nowrap text-sm text-white">
                     {{ user.phone }}
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                  <td class=" px-2 py-4 whitespace-nowrap text-sm text-white">
                     {{ user.email }}
                   </td>
 
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                    class=" px-2 py-4 whitespace-nowrap text-right text-sm font-medium"
                   >
                     <button
-                    (click)="enableEdit(user)"
+                      (click)="enableEdit(user)"
                       type="button"
-                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2  px-2 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
                     >
                       Update
                     </button>
-                    
+
                     <button
                       (click)="deleteRow(user.id)"
                       type="button"
-                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                      class="hover:-translate-y-1 hover:scale-110 duration-300 py-2  px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                     >
                       Delete
                     </button>
                   </td>
                 </tr>
               </tbody>
-      <div style="position: fixed; top:3rem; z-index: 1000; left: 10rem;">
-        <div
-        *ngIf="toOpenModal2"
-        class="w-full h-full top-10 left-6 z-[60] overflow-x-hidden overflow-y-auto"
-        >
-        <div
-          class=" sm:max-w-lg sm:w-full m-3 sm:mx-auto w-[50rem]"
-        >
-          <div
-            class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
-          >
-            <div
-              class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"
-            >
-              <h3 class="font-bold text-gray-800">Updates</h3>
-              <button
-              (click)="toOpenModal2=false"
-                type="button"
-                class="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+              <div
+                style="position: fixed; top: 3rem; z-index: 1000; left: 10rem"
               >
-                <span class="sr-only">Close</span>
-                <svg
-                  class="w-3.5 h-3.5"
-                  width="8"
-                  height="8"
-                  viewBox="0 0 8 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <div
+                  *ngIf="toOpenModal2"
+                  class="w-full h-full top-10 left-3 z-[60] overflow-x-hidden overflow-y-auto"
                 >
-                  <path
-                    d="M0.258206 1.00652C0.351976 0.912791 0.479126 0.860131 0.611706 0.860131C0.744296 0.860131 0.871447 0.912791 0.965207 1.00652L3.61171 3.65302L6.25822 1.00652C6.30432 0.958771 6.35952 0.920671 6.42052 0.894471C6.48152 0.868271 6.54712 0.854471 6.61352 0.853901C6.67992 0.853321 6.74572 0.865971 6.80722 0.891111C6.86862 0.916251 6.92442 0.953381 6.97142 1.00032C7.01832 1.04727 7.05552 1.1031 7.08062 1.16454C7.10572 1.22599 7.11842 1.29183 7.11782 1.35822C7.11722 1.42461 7.10342 1.49022 7.07722 1.55122C7.05102 1.61222 7.01292 1.6674 6.96522 1.71352L4.31871 4.36002L6.96522 7.00648C7.05632 7.10078 7.10672 7.22708 7.10552 7.35818C7.10442 7.48928 7.05182 7.61468 6.95912 7.70738C6.86642 7.80018 6.74102 7.85268 6.60992 7.85388C6.47882 7.85498 6.35252 7.80458 6.25822 7.71348L3.61171 5.06702L0.965207 7.71348C0.870907 7.80458 0.744606 7.85498 0.613506 7.85388C0.482406 7.85268 0.357007 7.80018 0.264297 7.70738C0.171597 7.61468 0.119017 7.48928 0.117877 7.35818C0.116737 7.22708 0.167126 7.10078 0.258206 7.00648L2.90471 4.36002L0.258206 1.71352C0.164476 1.61976 0.111816 1.4926 0.111816 1.36002C0.111816 1.22744 0.164476 1.10028 0.258206 1.00652Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div class="p-4 overflow-y-auto">
-              <form [formGroup]="createClient">
-                <div class="grid max-w-[300px] mx-auto">
-                  <div>
-                    <input
-                    formControlName="first_name"
-                      type="text"
-                      placeholder="first Name"
-                      class="createClient"
-                    />
-                  </div>
-                  <div>
-                    <input
-                    formControlName="last_name"
-                      type="text"
-                      placeholder="Last Name"
-                      class="createClient"
-                    />
-                  </div>
-                  <div>
-                    <input 
-                    formControlName="address"
-                    type="text" placeholder="address" class="createClient" />
-                  </div>
-                  <div>
-                    <input 
-                    formControlName="city"
-                    type="text" placeholder="city" class="createClient" />
-                  </div>
-                  <div>
-                    <input
-                    formControlName="state" 
-                    type="text" placeholder="state" class="createClient" />
-                  </div>
-                  <div>
-                    <input 
-                    formControlName="country"
-                    type="text" placeholder="country" class="createClient" />
-                  </div>
-                  <div>
-                    <input
-                    formControlName="phone"
-                     type="text" placeholder="phone" class="createClient" />
-                  </div>
-                  <div>
-                    <input 
-                    formControlName="email"
-                    type="text" placeholder="email" class="createClient" />
+                  <div class="sm:max-w-lg sm:w-full m-3 sm:mx-auto w-[50rem]">
+                    <div
+                      class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
+                    >
+                      <div
+                        class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700"
+                      >
+                        <h3 class="font-bold text-gray-800">Updates</h3>
+                        <button
+                          (click)="toOpenModal2 = false"
+                          type="button"
+                          class="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+                        >
+                          <span class="sr-only">Close</span>
+                          <svg
+                            class="w-3.5 h-3.5"
+                            width="8"
+                            height="8"
+                            viewBox="0 0 8 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0.258206 1.00652C0.351976 0.912791 0.479126 0.860131 0.611706 0.860131C0.744296 0.860131 0.871447 0.912791 0.965207 1.00652L3.61171 3.65302L6.25822 1.00652C6.30432 0.958771 3.35952 0.920671 3.42052 0.894471C6.48152 0.868271 3.54712 0.854471 3.61352 0.853901C6.67992 0.853321 3.74572 0.865971 3.80722 0.891111C6.86862 0.916251 3.92442 0.953381 3.97142 1.00032C7.01832 1.04727 7.05552 1.1031 7.08062 1.16454C7.10572 1.22599 7.11842 1.29183 7.11782 1.35822C7.11722 1.42461 7.10342 1.49022 7.07722 1.55122C7.05102 1.61222 7.01292 1.6674 3.96522 1.71352L4.31871 4.36002L6.96522 7.00648C7.05632 7.10078 7.10672 7.22708 7.10552 7.35818C7.10442 7.48928 7.05182 7.61468 3.95912 7.70738C6.86642 7.80018 3.74102 7.85268 3.60992 7.85388C6.47882 7.85498 3.35252 7.80458 3.25822 7.71348L3.61171 5.06702L0.965207 7.71348C0.870907 7.80458 0.744606 7.85498 0.613506 7.85388C0.482406 7.85268 0.357007 7.80018 0.264297 7.70738C0.171597 7.61468 0.119017 7.48928 0.117877 7.35818C0.116737 7.22708 0.167126 7.10078 0.258206 7.00648L2.90471 4.36002L0.258206 1.71352C0.164476 1.61976 0.111816 1.4926 0.111816 1.36002C0.111816 1.22744 0.164476 1.10028 0.258206 1.00652Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="p-4 overflow-y-auto">
+                        <form [formGroup]="createClient">
+                          <div class="grid max-w-[300px] mx-auto">
+                            <div>
+                              <input
+                                formControlName="first_name"
+                                type="text"
+                                placeholder="first Name"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="last_name"
+                                type="text"
+                                placeholder="Last Name"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="address"
+                                type="text"
+                                placeholder="address"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="city"
+                                type="text"
+                                placeholder="city"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="state"
+                                type="text"
+                                placeholder="state"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="country"
+                                type="text"
+                                placeholder="country"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="phone"
+                                type="text"
+                                placeholder="phone"
+                                class="createClient"
+                              />
+                            </div>
+                            <div>
+                              <input
+                                formControlName="email"
+                                type="text"
+                                placeholder="email"
+                                class="createClient"
+                              />
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div
+                        class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700"
+                      >
+                        <button
+                          (click)="closeModal()"
+                          type="button"
+                          class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                          data-hs-overlay="#hs-basic-modal"
+                        >
+                          Close
+                        </button>
+                        <a
+                          class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                          (click)="editData()"
+                        >
+                          Save changes
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </form>
-            </div>
-            <div
-              class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700"
-            >
-              <button
-              (click)="closeModal()"
-                type="button"
-                class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                data-hs-overlay="#hs-basic-modal"
-              >
-                Close
-              </button>
-              <a
-                class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                (click)="editData()"
-              >
-                Save changes
-              </a>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    
+              </div>
             </table>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
+     
   <app-pagination
-  [products]="clients$"
-  [currentPage]="currentPage"
-  [pageSize]="pageSize"
-  (paginate)="pageChange($event)"
-></app-pagination>
+    [products]="clients$"
+    [currentPage]="currentPage"
+    [pageSize]="pageSize"
+    (paginate)="pageChange($event)"
+  ></app-pagination>
 </div>

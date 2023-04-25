@@ -76,12 +76,33 @@
         </div>
 
         <div class="overflow-auto m-1">
-          <button
+          <div class="flex justify-between m-3">
+            <button
             (click)="createProduct()"
             class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ms-3 py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
           >
             create new product
           </button>
+          <div>
+            <label for="file"></label>
+            <input class="text-red-500" type="file" id="file" (change)="onFileChange($event)" #file/>
+            <button
+            [hidden]="!file.value"
+            (click)="importProduct()"
+              class="hover:-translate-y-1 hover:scale-110 duration-300 py-2 mr-2 px-3 inline-flex justify-center disabled:bg-slate-400 disabled:cursor-not-allowed items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
+            >
+              save
+            </button>
+          </div>
+          <div>
+            <a
+        href="javascript:void(0)"
+            (click)="downloadData()"
+            class="bg-green-500 text-white no-underline p-2 hover:text-red-500"
+      >Download Data <i class="fa-solid fa-download"></i></a>
+          </div>
+          </div>  
+        
           <form
             id="myDiv"
             [formGroup]="addNewRow"

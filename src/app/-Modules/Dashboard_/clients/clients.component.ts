@@ -4,6 +4,8 @@ import { Observable, Subscription, of } from 'rxjs';
 import { clientApiService } from '@Api/clients/clientApi.service';
 import { GetFunctionService } from '@Services/get-function.service';
 import { notificationService } from '@Services/notification.service';
+import * as Papa from 'papaparse';
+
 
 @Component({
   selector: 'app-clients',
@@ -22,6 +24,7 @@ export class ClientsComponent implements OnInit {
   public totalData!: number;
   public openModel=false;
   public toOpenModal2 = false;
+  public fileToUpload!:File;
 
   public clickEventSubscription:Subscription=this.functionServ.getClickEvent().subscribe(()=>{
     this.getClients()
@@ -99,5 +102,29 @@ export class ClientsComponent implements OnInit {
         }
       });
     }
+  }
+  public onFileChange(event:any){
+    this.fileToUpload=event.target.files.item(0)
+    
+  }
+  importClient(){
+    this.api.importCilent(this.fileToUpload).subscribe({
+     next:(res)=>{
+console.log(res)
+this.toastr.showSuccess('new Cilents added successfully')
+this.getClients()
+     }
+    })
+  }
+  downloadData(){
+    this.clients$.subscribe(data=>{
+      const csvData:any=Papa.unparse(data)
+      const blob=new Blob([csvData],{ type: 'text/csv' });
+      const Url=window.URL.createObjectURL(blob)
+      const link = document.createElement('a');
+      link.setAttribute('href',Url);
+      link.setAttribute('download', 'data.csv');
+      link.click();
+    })
   }
 }

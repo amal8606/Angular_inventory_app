@@ -6,8 +6,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.loginBg{
-  background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/34715621-8434-4866-af38-4df473d385de/d91yvy3-618feb4c-e760-40cb-aaf1-282b297b0b1c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM0NzE1NjIxLTg0MzQtNDg2Ni1hZjM4LTRkZjQ3M2QzODVkZVwvZDkxeXZ5My02MThmZWI0Yy1lNzYwLTQwY2ItYWFmMS0yODJiMjk3YjBiMWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.G5tEBR821xu0XBQRjXTMhmyvHGWalfrV_hhgq7h9NKQ');
+.loginBg {
+  background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/34715621-8434-4866-af38-4df473d385de/d91yvy3-618feb4c-e760-40cb-aaf1-282b297b0b1c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM0NzE1NjIxLTg0MzQtNDg2Ni1hZjM4LTRkZjQ3M2QzODVkZVwvZDkxeXZ5My02MThmZWI0Yy1lNzYwLTQwY2ItYWFmMS0yODJiMjk3YjBiMWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.G5tEBR821xu0XBQRjXTMhmyvHGWalfrV_hhgq7h9NKQ");
 }
 body {
   background-image: url("https://c8.alamy.com/comp/2D7NW07/hand-of-businessman-holding-inventory-management-inscription-business-success-concept-2D7NW07.jpg");
@@ -39,8 +39,8 @@ body {
   .formItem {
     @apply m-[10px];
   }
-  .active{
-    @apply bg-slate-300 rounded-md text-blue-500 hover:text-red-900
+  .active {
+    @apply bg-slate-300 rounded-md text-blue-500 hover:text-red-900;
   }
 }
 @layer base {

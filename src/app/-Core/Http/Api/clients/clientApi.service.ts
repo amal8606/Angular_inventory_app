@@ -27,4 +27,9 @@ updateClient(client:any):Observable<any>{
 deleteClient(clientId:number){
     return this.http.delete(`${this.url}/${clientId}`)
 }
+importCilent(file:File):Observable<any>{
+    const formData= new FormData();
+    formData.append('csv',file,file.name)
+return this.http.post(`${this.url}/import`,formData)
+}
 }

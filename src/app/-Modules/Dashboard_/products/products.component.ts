@@ -1,12 +1,12 @@
+import { productApiService } from '@Api/Products/productsApi.service';
+import { notificationService } from '@Services/notification.service';
 import { formatCurrency } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, map, of } from 'rxjs';
-import { productApiService } from '@Api/Products/productsApi.service';
-import { notificationService } from '@Services/notification.service';
 import { Iproducts } from 'src/app/-Shared/interfaces/product.interface';
-
+import * as Papa from 'papaparse';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './products.component.html'
@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
     private http: HttpClient,
     private toastr: notificationService
   ) {}
+  public downloadUrl!:string;
   isloading: boolean = false;
   public activeEvent: any;
   public stockEvent: any;
@@ -30,6 +31,7 @@ export class ProductsComponent implements OnInit {
   public currentPage = 1;
   public pageSize = 3;
   public totalData!: number;
+  public fileToUpload!:File;
   public updateForm: FormGroup = new FormGroup({});
 
   public addNewRow: FormGroup = new FormGroup({
@@ -256,5 +258,29 @@ export class ProductsComponent implements OnInit {
   public cancelChanges() {
     this.onEdit = false;
     this.addNewRow.reset()
+  }
+  public onFileChange(event:any){
+    this.fileToUpload=event.target.files.item(0)
+    
+  }
+  public importProduct(){
+this.api.importProduct(this.fileToUpload).subscribe({
+  next:(res)=>{
+    console.log(res)
+this.toastr.showSuccess('new products added successfully')
+this.getProducts()
+  }
+})
+  }
+  downloadData(){
+    this.userData$.subscribe(data=>{
+      const csvData:any=Papa.unparse(data)
+      const blob=new Blob([csvData],{ type: 'text/csv' });
+      this.downloadUrl=window.URL.createObjectURL(blob)
+      const link = document.createElement('a');
+      link.setAttribute('href', this.downloadUrl);
+      link.setAttribute('download', 'data.csv');
+      link.click();
+    })
   }
 }

@@ -35,4 +35,11 @@ public getAuth(): Observable<any> {
   deleteProduct(productId:number){
     return this.http.delete(`${this.url}/${productId}`)
 }
+importProduct(file:File):Observable<any>{
+    console.log(file)
+    const formData= new FormData();
+    formData.append('csv',file,file.name)
+    console.log(formData)
+return this.http.post(`${this.url}/import`,formData)
+}
 }
